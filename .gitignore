@@ -1,0 +1,66 @@
+# Build folders
+**/bin/
+**/obj/
+
+# Visual Studio files
+*.user
+*.suo
+*.vs/
+.vscode/
+
+# Rider files
+.idea/
+
+# NuGet
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/
+
+# DotNet build artifacts
+*.dll
+*.exe
+*.app
+*.appref-ms
+*.runtimeconfig.json
+*.deps.json
+
+# Local DB
+*.mdf
+*.ldf
+*.sqlite
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results - keep the folder but ignore its contents except coverage files
+**/TestResults/**
+!**/TestResults/**/*.cobertura.xml
+!**/TestResults/**/coverage.*.xml
+
+# Coverage reports folder - keep
+CoverageReport/
+
+# Code coverage raw files
+coverage.cobertura.xml
+coverage.json
+coverage.xml
+
+# Sonar
+/.scannerwork/
+
+# Secrets
+*.jks
+*.keystore
+*.pfx
+*.p12
+*.pem
+*.key
+*.publishsettings
+
+# User-specific files
+*.DotSettings.user
+*.userprefs

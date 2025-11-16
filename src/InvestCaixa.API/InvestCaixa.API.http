@@ -1,0 +1,6 @@
+@InvestCaixa.API_HostAddress = http://localhost:5199
+
+GET {{InvestCaixa.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
