@@ -6,30 +6,32 @@ namespace InvestCaixa.Infrastructure.Repositories;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly InvestimentoDbContext _context;
-    private ISimulacaoRepository? _simulacaoRepository;
-    private IProdutoRepository? _produtoRepository;
-    private IClienteRepository? _clienteRepository;
-    private IInvestimentoFinalizadoRepository? _investimentoFinalizadoRepository;
-    private IPerfilFinanceiroRepository? _perfilFinanceiroRepository;
+    public ISimulacaoRepository? SimulacaoRepository { get; }
+    public IProdutoRepository? ProdutoRepository { get; }
+    public IClienteRepository? ClienteRepository { get; }
+    public IInvestimentoFinalizadoRepository? InvestimentoFinalizadoRepository { get; }
+    public IPerfilFinanceiroRepository? PerfilFinanceiroRepository { get; }
 
     public UnitOfWork(InvestimentoDbContext context)
     {
         _context = context;
     }
 
-    public ISimulacaoRepository SimulacaoRepository => 
-        _simulacaoRepository ??= new SimulacaoRepository(_context);
-
-    public IProdutoRepository ProdutoRepository => 
-        _produtoRepository ??= new ProdutoRepository(_context);
-
-    public IClienteRepository ClienteRepository => 
-        _clienteRepository ??= new ClienteRepository(_context);
-
-    public IInvestimentoFinalizadoRepository InvestimentoFinalizadoRepository => 
-        _investimentoFinalizadoRepository ??= new InvestimentoFinalizadoRepository(_context);
-    public IPerfilFinanceiroRepository PerfilFinanceiroRepository => 
-        _perfilFinanceiroRepository ??= new PerfilFinanceiroRepository(_context);
+    public UnitOfWork(
+        InvestimentoDbContext context,
+        ISimulacaoRepository simulacaoRepository,
+        IProdutoRepository produtoRepository,
+        IClienteRepository clienteRepository,
+        IInvestimentoFinalizadoRepository investimentoFinalizadoRepository,
+        IPerfilFinanceiroRepository perfilFinanceiroRepository)
+    {
+        _context = context;
+        SimulacaoRepository = simulacaoRepository;
+        ProdutoRepository = produtoRepository;                         // <- aqui vem o CachingProdutoRepository
+        ClienteRepository = clienteRepository;
+        InvestimentoFinalizadoRepository = investimentoFinalizadoRepository;
+        PerfilFinanceiroRepository = perfilFinanceiroRepository;
+    }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

@@ -11,16 +11,17 @@ using InvestCaixa.Application.Validators;
 using InvestCaixa.Domain.Interfaces;
 using InvestCaixa.Infrastructure.Data;
 using InvestCaixa.Infrastructure.Repositories;
+using InvestCaixa.Infrastructure.Repositories.Decorators;
 using InvestCaixa.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
-using Swashbuckle.AspNetCore;
 using System;
 using System.Reflection;
 using System.Text;
+using StackExchange.Redis;
 
 public static class ServiceCollectionExtensions
 {
@@ -118,9 +119,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISimulacaoService, SimulacaoService>();
         services.AddScoped<IPerfilRiscoService, PerfilRiscoService>();
         services.AddScoped<ITelemetriaService, TelemetriaService>();
+        services.AddScoped<ICacheService, CacheService>();
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IInvestimentoFinalizadoRepository, InvestimentoFinalizadoRepository>();
-        services.AddScoped<IPerfilFinanceiroRepository, PerfilFinanceiroRepository>();
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<FinalizarInvestimentoCommandHandler>());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ObterPerfilRiscoQueryHandler>());
@@ -138,6 +138,14 @@ public static class ServiceCollectionExtensions
                 configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(InvestimentoDbContext).Assembly.FullName)));
 
+        services.AddScoped<ISimulacaoRepository, SimulacaoRepository>();
+        services.AddScoped<IProdutoRepository, ProdutoRepository>();
+        services.AddScoped<IClienteRepository, ClienteRepository>();
+        services.AddScoped<IInvestimentoFinalizadoRepository, InvestimentoFinalizadoRepository>();
+        services.AddScoped<IPerfilFinanceiroRepository, PerfilFinanceiroRepository>();
+
+        services.Decorate<IProdutoRepository, CachingProdutoRepository>();
+
         // Unit of Work & Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -145,6 +153,20 @@ public static class ServiceCollectionExtensions
         // Infrastructure Services
         services.AddSingleton<IDateTimeService, DateTimeService>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+        var redisConnectionString = configuration.GetConnectionString("Redis")
+            ?? throw new InvalidOperationException("Redis connection string não encontrada em appsettings.json");
+
+        services.AddMemoryCache();
+
+        var redisConnection = configuration.GetConnectionString("Redis")
+            ?? throw new InvalidOperationException("ConnectionStrings:Redis não configurada.");
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConnection;
+            options.InstanceName = "InvestCaixa_";
+        });
 
         return services;
     }

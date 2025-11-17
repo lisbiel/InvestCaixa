@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  # Redis para cache distribuído
+  redis:
+    image: redis:7-alpine
+    container_name: investcaixa-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # API .NET 9
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: investcaixa-api
+    ports:
+      - "7148:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/invest.db
+      - ConnectionStrings__Redis=redis:6379,abortConnect=false
+      - Jwt__Issuer=InvestCaixa
+      - Jwt__Audience=InvestCaixa
+      - Jwt__Secret=${JWT_SECRET:-ChaveSecretaSuperSeguraParaProducao123!@#}
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  redis-data:
+    driver: local

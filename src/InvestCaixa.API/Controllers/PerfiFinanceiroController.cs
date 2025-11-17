@@ -1,4 +1,5 @@
 ﻿using InvestCaixa.Application.DTOs.Request;
+using InvestCaixa.Application.Interfaces;
 using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Interfaces;
@@ -16,8 +17,13 @@ namespace InvestCaixa.API.Controllers;
 public class PerfilFinanceiroController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IPerfilRiscoService _perfilRiscoService;
 
-    public PerfilFinanceiroController(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public PerfilFinanceiroController(IUnitOfWork unitOfWork, IPerfilRiscoService perfilRiscoService)
+    {
+        _unitOfWork = unitOfWork;
+        _perfilRiscoService = perfilRiscoService;
+    }
 
     /// <summary>
     /// Cria ou atualiza perfil financeiro do cliente
@@ -32,6 +38,8 @@ public class PerfilFinanceiroController : ControllerBase
         var cliente = await _unitOfWork.ClienteRepository.GetByIdAsync(clienteId, cancellationToken);
         if (cliente is null) return NotFound("Cliente não encontrado");
 
+        var perfilExistente = await _unitOfWork.ClienteRepository.ObterPerfilRiscoAsync(clienteId, cancellationToken);
+
         var perfil = new PerfilFinanceiro(
             clienteId,
             request.RendaMensal,
@@ -43,8 +51,12 @@ public class PerfilFinanceiroController : ControllerBase
             request.ToleranciaPerda,
             request.ExperienciaInvestimentos);
 
+        perfilExistente.AtualizarPerfil(perfil);
+
         await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfil, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+
 
         return CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfil.Id });
     }

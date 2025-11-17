@@ -1,0 +1,388 @@
+2025-11-17 15:20:53.799 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-17 15:20:54.002 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-17 15:20:54.219 -03:00 [INF] Application started successfully
+2025-11-17 15:20:54.263 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-17 15:20:54.506 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-17 15:20:54.508 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-17 15:20:54.600 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 15:20:54.602 -03:00 [INF] Hosting environment: Development
+2025-11-17 15:20:54.603 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-17 15:21:32.537 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/ - null null
+2025-11-17 15:21:32.738 -03:00 [INF] Request GET / completado em 0ms com status 404
+2025-11-17 15:21:32.741 -03:00 [INF] HTTP GET / responded 404 in 61.6381 ms
+2025-11-17 15:21:32.747 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/ - 404 0 null 217.0941ms
+2025-11-17 15:21:32.752 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7148/, Response status code: 404
+2025-11-17 15:21:40.993 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-17 15:21:40.993 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-11-17 15:21:41.027 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 33.8558ms
+2025-11-17 15:21:41.105 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 112.5229ms
+2025-11-17 15:21:41.209 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-11-17 15:21:41.236 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 27.8822ms
+2025-11-17 15:22:04.846 -03:00 [INF] Request starting HTTP/2 POST https://localhost:7148/api/Auth/login - application/json 48
+2025-11-17 15:22:04.867 -03:00 [INF] CORS policy execution successful.
+2025-11-17 15:22:04.870 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API)'
+2025-11-17 15:22:04.891 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[InvestCaixa.Application.DTOs.Response.LoginResponse]] Login(InvestCaixa.Application.DTOs.Request.LoginRequest, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.AuthController (InvestCaixa.API).
+2025-11-17 15:22:04.959 -03:00 [INF] Tentativa de login para usuário admin
+2025-11-17 15:22:04.961 -03:00 [INF] Processando login para usuário admin
+2025-11-17 15:22:04.993 -03:00 [INF] Login bem-sucedido para usuário admin
+2025-11-17 15:22:04.999 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.LoginResponse'.
+2025-11-17 15:22:05.009 -03:00 [INF] Executed action InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API) in 112.8928ms
+2025-11-17 15:22:05.011 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API)'
+2025-11-17 15:22:05.012 -03:00 [INF] Request POST /api/Auth/login completado em 143ms com status 200
+2025-11-17 15:22:05.015 -03:00 [INF] HTTP POST /api/Auth/login responded 200 in 156.0846 ms
+2025-11-17 15:22:05.017 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/Auth/login - 200 null application/json; charset=utf-8 170.6753ms
+2025-11-17 15:22:21.163 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:22:21.206 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:21.212 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:22:21.217 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:22:21.284 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:22:21.286 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:22:21.367 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:22:21.396 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:22:21.405 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 190.8686ms
+2025-11-17 15:22:21.407 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:21.408 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 201ms com status 200
+2025-11-17 15:22:21.410 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 242.4836 ms
+2025-11-17 15:22:21.412 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 249.8094ms
+2025-11-17 15:22:24.289 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:22:24.294 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:24.295 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:22:24.298 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:22:24.343 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:22:24.345 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:22:24.347 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 50.2082ms
+2025-11-17 15:22:24.348 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:24.349 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 54ms com status 200
+2025-11-17 15:22:24.351 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 58.5653 ms
+2025-11-17 15:22:24.352 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 63.4422ms
+2025-11-17 15:22:36.693 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:22:36.697 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:36.698 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:22:36.702 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:22:36.704 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:22:36.706 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:22:36.707 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 7.3197ms
+2025-11-17 15:22:36.709 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:36.710 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 13ms com status 200
+2025-11-17 15:22:36.712 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 16.2565 ms
+2025-11-17 15:22:36.713 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 21.1611ms
+2025-11-17 15:22:37.467 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:22:37.471 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:37.472 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:22:37.474 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:22:37.477 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:22:37.479 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:22:37.480 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 6.8237ms
+2025-11-17 15:22:37.482 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:37.483 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 12ms com status 200
+2025-11-17 15:22:37.484 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 14.2831 ms
+2025-11-17 15:22:37.486 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 20.0448ms
+2025-11-17 15:22:50.968 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:22:50.972 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:50.973 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:22:50.976 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:22:50.978 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:22:50.980 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:22:50.981 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 6.2873ms
+2025-11-17 15:22:50.982 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:22:50.984 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 11ms com status 200
+2025-11-17 15:22:50.985 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 13.7101 ms
+2025-11-17 15:22:50.986 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 18.3077ms
+2025-11-17 15:23:35.899 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-17 15:23:36.114 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-17 15:23:36.245 -03:00 [INF] Application started successfully
+2025-11-17 15:23:36.283 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-17 15:23:36.537 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-17 15:23:36.539 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-17 15:23:36.639 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 15:23:36.640 -03:00 [INF] Hosting environment: Development
+2025-11-17 15:23:36.642 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-17 15:23:39.563 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:23:39.710 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:39.730 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:23:39.736 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:23:39.842 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:23:39.845 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:23:39.915 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:23:39.943 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:23:39.960 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 224.602ms
+2025-11-17 15:23:39.962 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:39.964 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 254ms com status 200
+2025-11-17 15:23:39.969 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 366.5660 ms
+2025-11-17 15:23:39.976 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 418.6489ms
+2025-11-17 15:23:40.790 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:23:40.799 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:40.801 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:23:40.805 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:23:40.867 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:23:40.871 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:23:40.874 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 70.6219ms
+2025-11-17 15:23:40.876 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:40.878 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 78ms com status 200
+2025-11-17 15:23:40.879 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 83.9486 ms
+2025-11-17 15:23:40.882 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 92.2527ms
+2025-11-17 15:23:41.412 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:23:41.420 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:41.422 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:23:41.427 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:23:41.429 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:23:41.432 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:23:41.434 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 9.3397ms
+2025-11-17 15:23:41.436 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:41.437 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 16ms com status 200
+2025-11-17 15:23:41.439 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 22.6570 ms
+2025-11-17 15:23:41.442 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 30.1313ms
+2025-11-17 15:23:41.986 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:23:41.990 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:41.992 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:23:41.994 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:23:41.996 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:23:41.999 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:23:42.001 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 6.7423ms
+2025-11-17 15:23:42.002 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:42.003 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 13ms com status 200
+2025-11-17 15:23:42.005 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 14.9219 ms
+2025-11-17 15:23:42.006 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 20.6355ms
+2025-11-17 15:23:47.208 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:23:47.211 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:47.212 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:23:47.215 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:23:47.217 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:23:47.219 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:23:47.221 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 6.1431ms
+2025-11-17 15:23:47.222 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:23:47.223 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 12ms com status 200
+2025-11-17 15:23:47.225 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 13.7941 ms
+2025-11-17 15:23:47.227 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 19.1991ms
+2025-11-17 15:30:43.790 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-17 15:30:43.992 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-17 15:30:44.147 -03:00 [INF] Application started successfully
+2025-11-17 15:30:44.178 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-17 15:30:44.357 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-17 15:30:44.358 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-17 15:30:44.435 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 15:30:44.436 -03:00 [INF] Hosting environment: Development
+2025-11-17 15:30:44.437 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-17 15:31:22.213 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:31:22.366 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:22.388 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:31:22.394 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:31:22.485 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:31:22.487 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:31:22.566 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:31:22.598 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:31:22.622 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 229.22ms
+2025-11-17 15:31:22.624 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:22.626 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 260ms com status 200
+2025-11-17 15:31:22.630 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 373.3496 ms
+2025-11-17 15:31:22.635 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 428.4466ms
+2025-11-17 15:31:23.332 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:31:23.339 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:23.340 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:31:23.344 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:31:23.385 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:31:23.389 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:31:23.391 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 48.9597ms
+2025-11-17 15:31:23.392 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:23.394 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 54ms com status 200
+2025-11-17 15:31:23.395 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 58.7707 ms
+2025-11-17 15:31:23.397 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 65.2612ms
+2025-11-17 15:31:23.981 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:31:23.988 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:23.989 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:31:23.994 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:31:23.995 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:31:23.998 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:31:23.999 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 7.8897ms
+2025-11-17 15:31:24.000 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:31:24.001 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 13ms com status 200
+2025-11-17 15:31:24.003 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 18.1488 ms
+2025-11-17 15:31:24.004 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 23.4667ms
+2025-11-17 15:33:47.442 -03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-17 15:33:47.659 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-17 15:33:47.816 -03:00 [INF] Application started successfully
+2025-11-17 15:33:47.848 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-17 15:33:48.025 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-17 15:33:48.026 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-17 15:33:48.102 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 15:33:48.103 -03:00 [INF] Hosting environment: Development
+2025-11-17 15:33:48.104 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-17 15:35:12.925 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:35:13.112 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:13.136 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:35:13.142 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:35:13.271 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:35:13.274 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:35:13.369 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:35:13.404 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:35:13.423 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 281.9049ms
+2025-11-17 15:35:13.425 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:13.427 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 315ms com status 200
+2025-11-17 15:35:13.431 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 463.3578 ms
+2025-11-17 15:35:13.437 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 518.8782ms
+2025-11-17 15:35:17.925 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:35:17.932 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:17.934 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:35:17.938 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:35:17.985 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:35:17.988 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:35:17.990 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 54.0466ms
+2025-11-17 15:35:17.991 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:17.993 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 60ms com status 200
+2025-11-17 15:35:17.995 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 65.4089 ms
+2025-11-17 15:35:17.997 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 71.7257ms
+2025-11-17 15:35:33.582 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:35:33.589 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:33.590 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:35:33.594 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:35:33.596 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:35:33.598 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:35:33.600 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 7.4702ms
+2025-11-17 15:35:33.601 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:33.602 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 13ms com status 200
+2025-11-17 15:35:33.604 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 18.0099 ms
+2025-11-17 15:35:33.605 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 23.7349ms
+2025-11-17 15:35:39.795 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:35:39.799 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:39.801 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:35:39.804 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:35:39.806 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:35:39.808 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:35:39.810 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 6.8019ms
+2025-11-17 15:35:39.811 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:35:39.812 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 13ms com status 200
+2025-11-17 15:35:39.814 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 14.6413 ms
+2025-11-17 15:35:39.815 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 20.5328ms
+2025-11-17 15:44:09.872 -03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-17 15:44:10.141 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-17 15:44:10.269 -03:00 [INF] Application started successfully
+2025-11-17 15:44:10.300 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-17 15:44:10.453 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-17 15:44:10.454 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-17 15:44:10.530 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 15:44:10.531 -03:00 [INF] Hosting environment: Development
+2025-11-17 15:44:10.532 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-17 15:44:27.653 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - null null
+2025-11-17 15:44:27.796 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:44:27.816 -03:00 [INF] Route matched with {action = "ObterProdutosRecomendados", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterProdutosRecomendados(InvestCaixa.Domain.Enums.PerfilInvestidor, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-17 15:44:27.822 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:44:27.928 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-17 15:44:27.931 -03:00 [INF] Buscando produtos recomendados para perfil 1
+2025-11-17 15:44:45.115 -03:00 [ERR] Erro ao obter do cache: produtos:perfil:Conservador
+StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout, command=HMGET, timeout: 5000, inst: 0, qu: 0, qs: 0, aw: False, bw: CheckingForTimeout, rs: NotStarted, ws: Idle, in: 0, last-in: 0, cur-in: 0, sync-ops: 0, async-ops: 1, serverEndpoint: localhost:6379, conn-sec: n/a, aoc: 0, mc: 1/1/0, mgr: 10 of 10 available, clientName: GABRIEL-G15(SE.Redis-v2.9.32.54708), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=0,Free=32767,Min=16,Max=32767), POOL: (Threads=7,QueuedItems=0,CompletedItems=120,Timers=7), v: 2.9.32.54708 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+ ---> StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Microsoft.Extensions.Caching.Distributed.DistributedCacheExtensions.GetStringAsync(IDistributedCache cache, String key, CancellationToken token)
+   at InvestCaixa.Application.Services.CacheService.GetAsync[T](String key) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.Application\Services\CacheService.cs:line 49
+2025-11-17 15:44:45.200 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__perfil_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."PerfilRecomendado" = @__perfil_0
+ORDER BY "p"."Risco"
+2025-11-17 15:44:51.096 -03:00 [ERR] Erro ao definir o cache: produtos:perfil:Conservador
+StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout, command=HMSET, timeout: 5000, inst: 0, qu: 1, qs: 0, aw: False, bw: CheckingForTimeout, rs: NotStarted, ws: Idle, in: 0, last-in: 0, cur-in: 0, sync-ops: 0, async-ops: 3, serverEndpoint: localhost:6379, conn-sec: n/a, aoc: 0, mc: 1/1/0, mgr: 10 of 10 available, clientName: GABRIEL-G15(SE.Redis-v2.9.32.54708), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=0,Free=32767,Min=16,Max=32767), POOL: (Threads=7,QueuedItems=0,CompletedItems=159,Timers=5), v: 2.9.32.54708 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+ ---> StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.SetImplAsync(String key, ReadOnlySequence`1 value, DistributedCacheEntryOptions options, CancellationToken token)
+   at InvestCaixa.Application.Services.CacheService.SetAsync[T](String key, T value, Nullable`1 expiration) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.Application\Services\CacheService.cs:line 151
+2025-11-17 15:44:51.115 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[InvestCaixa.Application.DTOs.Response.ProdutoResponse, InvestCaixa.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 15:44:51.124 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API) in 23304.1139ms
+2025-11-17 15:44:51.127 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterProdutosRecomendados (InvestCaixa.API)'
+2025-11-17 15:44:51.128 -03:00 [INF] Request GET /api/perfil-risco/produtos-recomendados/1 completado em 23333ms com status 200
+2025-11-17 15:44:51.132 -03:00 [INF] HTTP GET /api/perfil-risco/produtos-recomendados/1 responded 200 in 23439.3501 ms
+2025-11-17 15:44:51.137 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/produtos-recomendados/1 - 200 null application/json; charset=utf-8 23490.8716ms

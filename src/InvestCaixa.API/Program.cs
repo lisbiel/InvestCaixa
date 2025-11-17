@@ -41,19 +41,15 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseApiServices();
 app.UseTelemetria();
 
 app.MapControllers();
 
 Log.Information("Application started successfully");
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 await app.RunAsync();
 
