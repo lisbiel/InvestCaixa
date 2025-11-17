@@ -3,6 +3,7 @@ namespace InvestCaixa.API.Extensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using InvestCaixa.API.Middlewares;
+using InvestCaixa.Application.Handlers;
 using InvestCaixa.Application.Interfaces;
 using InvestCaixa.Application.Mappings;
 using InvestCaixa.Application.Services;
@@ -118,6 +119,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPerfilRiscoService, PerfilRiscoService>();
         services.AddScoped<ITelemetriaService, TelemetriaService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IInvestimentoFinalizadoRepository, InvestimentoFinalizadoRepository>();
+        services.AddScoped<IPerfilFinanceiroRepository, PerfilFinanceiroRepository>();
+
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<FinalizarInvestimentoCommandHandler>());
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ObterPerfilRiscoQueryHandler>());
 
         return services;
     }

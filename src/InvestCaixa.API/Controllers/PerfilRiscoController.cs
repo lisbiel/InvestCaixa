@@ -1,8 +1,9 @@
 namespace InvestCaixa.API.Controllers;
 
 using InvestCaixa.Application.DTOs.Response;
-using InvestCaixa.Application.Interfaces;
+using InvestCaixa.Application.Handlers.Queries;
 using InvestCaixa.Domain.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,44 +12,34 @@ using Microsoft.AspNetCore.Mvc;
 [Authorize]
 public class PerfilRiscoController : ControllerBase
 {
-    private readonly IPerfilRiscoService _perfilRiscoService;
-    private readonly ILogger<PerfilRiscoController> _logger;
+    private readonly IMediator _mediator;
 
-    public PerfilRiscoController(
-        IPerfilRiscoService perfilRiscoService,
-        ILogger<PerfilRiscoController> logger)
-    {
-        _perfilRiscoService = perfilRiscoService;
-        _logger = logger;
-    }
+    public PerfilRiscoController(IMediator mediator) => _mediator = mediator;
 
     /// <summary>
-    /// Obtém o perfil de risco de um cliente
+    /// Obtém o perfil de risco do cliente
     /// </summary>
     [HttpGet("{clienteId}")]
     [ProducesResponseType(typeof(PerfilRiscoResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<PerfilRiscoResponse>> ObterPerfilRisco(
-        int clienteId,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ObterPerfilRisco(int clienteId, CancellationToken cancellationToken)
     {
-        var perfil = await _perfilRiscoService.ObterPerfilRiscoAsync(clienteId, cancellationToken);
-        return Ok(perfil);
+        var query = new ObterPerfilRiscoQuery(clienteId);
+        var resultado = await _mediator.Send(query, cancellationToken);
+        return Ok(resultado);
     }
 
     /// <summary>
-    /// Obtém produtos recomendados para um perfil específico.
-    /// 1 = Conservador, 2 = Moderado, 3 = Agressivo.
+    /// Obtém produtos recomendados para um perfil específico
+    /// 1 = Conservador, 2 = Moderado, 3 = Agressivo
     /// </summary>
     [HttpGet("produtos-recomendados/{perfil}")]
     [ProducesResponseType(typeof(IEnumerable<ProdutoResponse>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<ProdutoResponse>>> ObterProdutosRecomendados(
+    public async Task<IActionResult> ObterProdutosRecomendados(
         PerfilInvestidor perfil,
         CancellationToken cancellationToken)
     {
-        var produtos = await _perfilRiscoService
-            .ObterProdutosRecomendadosAsync(perfil, cancellationToken);
-
-        return Ok(produtos);
+        var query = new ObterProdutosRecomendadosQuery((int)perfil);
+        var resultado = await _mediator.Send(query, cancellationToken);
+        return Ok(resultado);
     }
 }

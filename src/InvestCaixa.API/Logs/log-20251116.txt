@@ -1178,3 +1178,506 @@ InvestCaixa.Domain.Exceptions.ValidationException: Valor mínimo para este produ
 2025-11-16 11:44:02.996 -03:00 [INF] Request POST /api/Simulacao/simular-investimento completado em 29ms com status 400
 2025-11-16 11:44:03.000 -03:00 [INF] HTTP POST /api/Simulacao/simular-investimento responded 400 in 34.8861 ms
 2025-11-16 11:44:03.004 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/Simulacao/simular-investimento - 400 null application/problem+json; charset=utf-8 44.0675ms
+2025-11-16 16:35:25.841 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-11-16 16:35:26.191 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-16 16:35:26.473 -03:00 [INF] Application started successfully
+2025-11-16 16:35:26.524 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-16 16:35:26.834 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-16 16:35:26.836 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-16 16:35:27.210 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 16:35:27.212 -03:00 [INF] Hosting environment: Development
+2025-11-16 16:35:27.213 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-16 16:36:04.538 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/index.html - null null
+2025-11-16 16:36:04.948 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/index.html - 200 null text/html;charset=utf-8 423.4698ms
+2025-11-16 16:36:05.026 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/index.css - null null
+2025-11-16 16:36:05.030 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/swagger-ui-bundle.js - null null
+2025-11-16 16:36:05.037 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/swagger-ui-standalone-preset.js - null null
+2025-11-16 16:36:05.027 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/swagger-ui.css - null null
+2025-11-16 16:36:05.041 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/index.js - null null
+2025-11-16 16:36:05.054 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-16 16:36:05.114 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/index.js - 200 null application/javascript;charset=utf-8 73.4251ms
+2025-11-16 16:36:05.130 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/index.css - 200 152 text/css 104.205ms
+2025-11-16 16:36:05.065 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/_vs/browserLink - null null
+2025-11-16 16:36:05.168 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_framework/aspnetcore-browser-refresh.js - 200 13766 application/javascript; charset=utf-8 113.4356ms
+2025-11-16 16:36:05.171 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/swagger-ui.css - 200 23649 text/css 144.3796ms
+2025-11-16 16:36:05.171 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/swagger-ui-standalone-preset.js - 200 77354 text/javascript 133.8904ms
+2025-11-16 16:36:05.175 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/swagger-ui-bundle.js - 200 424834 text/javascript 145.7412ms
+2025-11-16 16:36:05.397 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/_vs/browserLink - 200 null text/javascript; charset=UTF-8 332.2888ms
+2025-11-16 16:36:05.485 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - null null
+2025-11-16 16:36:05.525 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 40.7786ms
+2025-11-16 16:36:22.306 -03:00 [INF] Request starting HTTP/2 POST https://localhost:7148/api/Auth/login - application/json 48
+2025-11-16 16:36:22.495 -03:00 [INF] CORS policy execution successful.
+2025-11-16 16:36:22.502 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API)'
+2025-11-16 16:36:22.543 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[InvestCaixa.Application.DTOs.Response.LoginResponse]] Login(InvestCaixa.Application.DTOs.Request.LoginRequest, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.AuthController (InvestCaixa.API).
+2025-11-16 16:36:22.713 -03:00 [INF] Tentativa de login para usuário admin
+2025-11-16 16:36:22.718 -03:00 [INF] Processando login para usuário admin
+2025-11-16 16:36:22.784 -03:00 [INF] Login bem-sucedido para usuário admin
+2025-11-16 16:36:22.800 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.LoginResponse'.
+2025-11-16 16:36:22.825 -03:00 [INF] Executed action InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API) in 270.7242ms
+2025-11-16 16:36:22.829 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.AuthController.Login (InvestCaixa.API)'
+2025-11-16 16:36:22.834 -03:00 [INF] Request POST /api/Auth/login completado em 331ms com status 200
+2025-11-16 16:36:22.841 -03:00 [INF] HTTP POST /api/Auth/login responded 200 in 520.3253 ms
+2025-11-16 16:36:22.848 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/Auth/login - 200 null application/json; charset=utf-8 541.3504ms
+2025-11-16 16:37:00.976 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/Telemetria - null null
+2025-11-16 16:37:01.092 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.TelemetriaController.ObterTelemetria (InvestCaixa.API)'
+2025-11-16 16:37:01.105 -03:00 [INF] Route matched with {action = "ObterTelemetria", controller = "Telemetria"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[InvestCaixa.Application.DTOs.Response.TelemetriaResponse]] ObterTelemetria(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.TelemetriaController (InvestCaixa.API).
+2025-11-16 16:37:01.114 -03:00 [INF] Obtendo dados de telemetria
+2025-11-16 16:37:01.118 -03:00 [INF] Obtendo dados de telemetria
+2025-11-16 16:37:01.124 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.TelemetriaResponse'.
+2025-11-16 16:37:01.144 -03:00 [INF] Executed action InvestCaixa.API.Controllers.TelemetriaController.ObterTelemetria (InvestCaixa.API) in 34.8191ms
+2025-11-16 16:37:01.155 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.TelemetriaController.ObterTelemetria (InvestCaixa.API)'
+2025-11-16 16:37:01.157 -03:00 [INF] Request GET /api/Telemetria completado em 64ms com status 200
+2025-11-16 16:37:01.159 -03:00 [INF] HTTP GET /api/Telemetria responded 200 in 172.2322 ms
+2025-11-16 16:37:01.163 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/Telemetria - 200 null application/json; charset=utf-8 191.9476ms
+2025-11-16 16:37:33.142 -03:00 [INF] Request starting HTTP/2 POST https://localhost:7148/api/Simulacao/simular-investimento - application/json 83
+2025-11-16 16:37:33.194 -03:00 [INF] CORS policy execution successful.
+2025-11-16 16:37:33.202 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.SimulacaoController.SimularInvestimento (InvestCaixa.API)'
+2025-11-16 16:37:33.211 -03:00 [INF] Route matched with {action = "SimularInvestimento", controller = "Simulacao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[InvestCaixa.Application.DTOs.Response.SimulacaoResponse]] SimularInvestimento(InvestCaixa.Application.DTOs.Request.SimularInvestimentoRequest, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.SimulacaoController (InvestCaixa.API).
+2025-11-16 16:37:33.376 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-16 16:37:33.413 -03:00 [INF] Recebida requisição de simulação para cliente 1
+2025-11-16 16:37:33.418 -03:00 [INF] Iniciando simulação para cliente 1 com valor 4000
+2025-11-16 16:37:33.604 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__tipoProduto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+FROM "Produtos" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."Tipo" = @__tipoProduto_0
+LIMIT 1
+2025-11-16 16:37:33.911 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (DbType = DateTime), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (DbType = Guid), @p7='?' (Size = 23), @p8='?' (DbType = Decimal), @p9='?' (DbType = DateTime), @p10='?' (DbType = Decimal), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Simulacoes" ("Id", "ClienteId", "CreatedAt", "DataSimulacao", "IsDeleted", "PrazoMeses", "ProdutoId", "ProdutoSimulado", "RentabilidadeCalculada", "UpdatedAt", "ValorFinal", "ValorInvestido")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:37:33.927 -03:00 [INF] Simulação concluída. Valor inicial: 4000, Valor final: 5718.01124771608000
+2025-11-16 16:37:33.943 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.SimulacaoResponse'.
+2025-11-16 16:37:33.956 -03:00 [INF] Executed action InvestCaixa.API.Controllers.SimulacaoController.SimularInvestimento (InvestCaixa.API) in 742.3284ms
+2025-11-16 16:37:33.959 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.SimulacaoController.SimularInvestimento (InvestCaixa.API)'
+2025-11-16 16:37:33.962 -03:00 [INF] Request POST /api/Simulacao/simular-investimento completado em 760ms com status 200
+2025-11-16 16:37:33.965 -03:00 [INF] HTTP POST /api/Simulacao/simular-investimento responded 200 in 789.8529 ms
+2025-11-16 16:37:33.970 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/Simulacao/simular-investimento - 200 null application/json; charset=utf-8 827.3639ms
+2025-11-16 16:37:55.128 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/1 - null null
+2025-11-16 16:37:55.148 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API)'
+2025-11-16 16:37:55.157 -03:00 [INF] Route matched with {action = "ObterPerfilRisco", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterPerfilRisco(Int32, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-16 16:37:55.165 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-16 16:37:55.180 -03:00 [INF] Obtendo perfil de risco para cliente 1
+2025-11-16 16:37:55.292 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."CPF", "c"."CreatedAt", "c"."DataNascimento", "c"."Email", "c"."IsDeleted", "c"."Nome", "c"."PerfilAtual", "c"."UpdatedAt"
+FROM "Clientes" AS "c"
+WHERE NOT ("c"."IsDeleted") AND "c"."Id" = @__p_0
+LIMIT 1
+2025-11-16 16:37:55.351 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__clienteId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClienteId", "p"."CreatedAt", "p"."Descricao", "p"."FrequenciaMovimentacoes", "p"."IsDeleted", "p"."Perfil", "p"."Pontuacao", "p"."PrefereLiquidez", "p"."UpdatedAt", "p"."VolumeInvestimentos"
+FROM "PerfisRisco" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."ClienteId" = @__clienteId_0
+LIMIT 1
+2025-11-16 16:37:55.358 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.PerfilRiscoResponse'.
+2025-11-16 16:37:55.362 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API) in 200.5646ms
+2025-11-16 16:37:55.364 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API)'
+2025-11-16 16:37:55.366 -03:00 [INF] Request GET /api/perfil-risco/1 completado em 217ms com status 200
+2025-11-16 16:37:55.368 -03:00 [INF] HTTP GET /api/perfil-risco/1 responded 200 in 222.8809 ms
+2025-11-16 16:37:55.371 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/1 - 200 null application/json; charset=utf-8 243.9726ms
+2025-11-16 16:40:05.827 -03:00 [INF] Request starting HTTP/2 POST https://localhost:7148/api/perfil-financeiro/1 - application/json 203
+2025-11-16 16:40:05.861 -03:00 [INF] CORS policy execution successful.
+2025-11-16 16:40:05.863 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API)'
+2025-11-16 16:40:05.870 -03:00 [INF] Route matched with {action = "CriarPerfilFinanceiro", controller = "PerfilFinanceiro"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CriarPerfilFinanceiro(Int32, InvestCaixa.Application.DTOs.Request.CriarPerfilFinanceiroRequest, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilFinanceiroController (InvestCaixa.API).
+2025-11-16 16:40:05.892 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."CPF", "c"."CreatedAt", "c"."DataNascimento", "c"."Email", "c"."IsDeleted", "c"."Nome", "c"."PerfilAtual", "c"."UpdatedAt"
+FROM "Clientes" AS "c"
+WHERE NOT ("c"."IsDeleted") AND "c"."Id" = @__p_0
+LIMIT 1
+2025-11-16 16:40:05.971 -03:00 [ERR] Failed executing DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Decimal), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "PerfisFinanceiros" ("Id", "ClienteId", "CreatedAt", "DependentesFinanceiros", "DividasAtivas", "ExperienciaInvestimentos", "Horizonte", "IsDeleted", "Objetivo", "PatrimonioTotal", "RendaMensal", "ToleranciaPerda", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2025-11-16 16:40:06.025 -03:00 [ERR] An exception occurred in the database while saving changes for context type 'InvestCaixa.Infrastructure.Data.InvestimentoDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: PerfisFinanceiros'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: PerfisFinanceiros'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-11-16 16:40:06.159 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API) in 285.3759ms
+2025-11-16 16:40:06.163 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API)'
+2025-11-16 16:40:06.188 -03:00 [INF] Request POST /api/perfil-financeiro/1 completado em 325ms com status 200
+2025-11-16 16:40:06.193 -03:00 [ERR] HTTP POST /api/perfil-financeiro/1 responded 500 in 332.9259 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: PerfisFinanceiros'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at InvestCaixa.Infrastructure.Repositories.UnitOfWork.SaveChangesAsync(CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.Infrastructure\Repositories\UnitOfWork.cs:line 36
+   at InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro(Int32 clienteId, CriarPerfilFinanceiroRequest request, CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Controllers\PerfiFinanceiroController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at InvestCaixa.API.Middlewares.TelemetriaMiddleware.InvokeAsync(HttpContext context, ITelemetriaService telemetriaService) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Middlewares\TelemetriaMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-11-16 16:40:06.228 -03:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: PerfisFinanceiros'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at InvestCaixa.Infrastructure.Repositories.UnitOfWork.SaveChangesAsync(CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.Infrastructure\Repositories\UnitOfWork.cs:line 36
+   at InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro(Int32 clienteId, CriarPerfilFinanceiroRequest request, CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Controllers\PerfiFinanceiroController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at InvestCaixa.API.Middlewares.TelemetriaMiddleware.InvokeAsync(HttpContext context, ITelemetriaService telemetriaService) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Middlewares\TelemetriaMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-11-16 16:40:06.253 -03:00 [ERR] Ocorreu uma exceção: An error occurred while saving the entity changes. See the inner exception for details.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: PerfisFinanceiros'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at InvestCaixa.Infrastructure.Repositories.UnitOfWork.SaveChangesAsync(CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.Infrastructure\Repositories\UnitOfWork.cs:line 36
+   at InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro(Int32 clienteId, CriarPerfilFinanceiroRequest request, CancellationToken cancellationToken) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Controllers\PerfiFinanceiroController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at InvestCaixa.API.Middlewares.TelemetriaMiddleware.InvokeAsync(HttpContext context, ITelemetriaService telemetriaService) in C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API\Middlewares\TelemetriaMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-11-16 16:40:06.300 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/perfil-financeiro/1 - 500 null application/json; charset=utf-8 472.9002ms
+2025-11-16 16:40:35.930 -03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2025-11-16 16:40:36.298 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Clientes" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Clientes" PRIMARY KEY AUTOINCREMENT,
+    "Nome" TEXT NOT NULL,
+    "Email" TEXT NOT NULL,
+    "CPF" TEXT NOT NULL,
+    "DataNascimento" TEXT NOT NULL,
+    "PerfilAtual" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL
+);
+2025-11-16 16:40:36.304 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Produtos" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_Produtos" PRIMARY KEY,
+    "Nome" TEXT NOT NULL,
+    "Tipo" INTEGER NOT NULL,
+    "Rentabilidade" TEXT NOT NULL,
+    "Risco" INTEGER NOT NULL,
+    "PrazoMinimoDias" INTEGER NOT NULL,
+    "ValorMinimoAplicacao" TEXT NOT NULL,
+    "PermiteLiquidez" INTEGER NOT NULL,
+    "PerfilRecomendado" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL
+);
+2025-11-16 16:40:36.310 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PerfisFinanceiros" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_PerfisFinanceiros" PRIMARY KEY,
+    "ClienteId" INTEGER NOT NULL,
+    "RendaMensal" TEXT NOT NULL,
+    "PatrimonioTotal" TEXT NOT NULL,
+    "DividasAtivas" TEXT NOT NULL,
+    "DependentesFinanceiros" INTEGER NOT NULL,
+    "Horizonte" INTEGER NOT NULL,
+    "Objetivo" INTEGER NOT NULL,
+    "ToleranciaPerda" INTEGER NOT NULL,
+    "ExperienciaInvestimentos" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    CONSTRAINT "FK_PerfisFinanceiros_Clientes_ClienteId" FOREIGN KEY ("ClienteId") REFERENCES "Clientes" ("Id") ON DELETE CASCADE
+);
+2025-11-16 16:40:36.314 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PerfisRisco" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_PerfisRisco" PRIMARY KEY,
+    "ClienteId" INTEGER NOT NULL,
+    "Perfil" INTEGER NOT NULL,
+    "Pontuacao" INTEGER NOT NULL,
+    "Descricao" TEXT NOT NULL,
+    "VolumeInvestimentos" TEXT NOT NULL,
+    "FrequenciaMovimentacoes" INTEGER NOT NULL,
+    "PrefereLiquidez" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    CONSTRAINT "FK_PerfisRisco_Clientes_ClienteId" FOREIGN KEY ("ClienteId") REFERENCES "Clientes" ("Id") ON DELETE CASCADE
+);
+2025-11-16 16:40:36.320 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "InvestimentosFinalizados" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_InvestimentosFinalizados" PRIMARY KEY,
+    "ClienteId" INTEGER NOT NULL,
+    "ProdutoId" TEXT NOT NULL,
+    "ValorAplicado" TEXT NOT NULL,
+    "ValorResgatado" TEXT NOT NULL,
+    "DataAplicacao" TEXT NOT NULL,
+    "DataResgate" TEXT NULL,
+    "Status" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    CONSTRAINT "FK_InvestimentosFinalizados_Clientes_ClienteId" FOREIGN KEY ("ClienteId") REFERENCES "Clientes" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_InvestimentosFinalizados_Produtos_ProdutoId" FOREIGN KEY ("ProdutoId") REFERENCES "Produtos" ("Id") ON DELETE RESTRICT
+);
+2025-11-16 16:40:36.325 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Simulacoes" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_Simulacoes" PRIMARY KEY,
+    "ClienteId" INTEGER NOT NULL,
+    "ProdutoSimulado" TEXT NOT NULL,
+    "ProdutoId" TEXT NOT NULL,
+    "ValorInvestido" TEXT NOT NULL,
+    "ValorFinal" TEXT NOT NULL,
+    "PrazoMeses" INTEGER NOT NULL,
+    "DataSimulacao" TEXT NOT NULL,
+    "RentabilidadeCalculada" TEXT NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    CONSTRAINT "FK_Simulacoes_Clientes_ClienteId" FOREIGN KEY ("ClienteId") REFERENCES "Clientes" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Simulacoes_Produtos_ProdutoId" FOREIGN KEY ("ProdutoId") REFERENCES "Produtos" ("Id") ON DELETE RESTRICT
+);
+2025-11-16 16:40:36.330 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES ('1D0F88E7-8F33-44FB-AF04-0D854A5DBAC1', '2025-11-16 19:40:36.03159', 0, 'LCI Plus', 1, 0, 90, '0.11', 1, 2, NULL, '5000.0');
+SELECT changes();
+
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES ('25986092-F265-4C34-8745-BD3A7EFFE29B', '2025-11-16 19:40:36.0315893', 0, 'CDB Caixa 2026', 1, 1, 180, '0.12', 1, 1, NULL, '1000.0');
+SELECT changes();
+
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES ('EB5B9F21-D7DB-46CD-A31A-C6CBC12A40D9', '2025-11-16 19:40:36.0315901', 0, 'Fundo Multimercado XPTO', 3, 1, 0, '0.18', 3, 5, NULL, '500.0');
+SELECT changes();
+2025-11-16 16:40:36.335 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Clientes_CPF" ON "Clientes" ("CPF");
+2025-11-16 16:40:36.339 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Clientes_Email" ON "Clientes" ("Email");
+2025-11-16 16:40:36.344 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_InvestimentosFinalizados_ClienteId" ON "InvestimentosFinalizados" ("ClienteId");
+2025-11-16 16:40:36.349 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_InvestimentosFinalizados_ProdutoId" ON "InvestimentosFinalizados" ("ProdutoId");
+2025-11-16 16:40:36.355 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_InvestimentosFinalizados_Status" ON "InvestimentosFinalizados" ("Status");
+2025-11-16 16:40:36.359 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PerfisFinanceiros_ClienteId" ON "PerfisFinanceiros" ("ClienteId");
+2025-11-16 16:40:36.367 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_PerfisRisco_ClienteId" ON "PerfisRisco" ("ClienteId");
+2025-11-16 16:40:36.371 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PerfisRisco_Perfil" ON "PerfisRisco" ("Perfil");
+2025-11-16 16:40:36.378 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Produtos_PerfilRecomendado" ON "Produtos" ("PerfilRecomendado");
+2025-11-16 16:40:36.383 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Produtos_Tipo" ON "Produtos" ("Tipo");
+2025-11-16 16:40:36.388 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Simulacoes_ClienteId" ON "Simulacoes" ("ClienteId");
+2025-11-16 16:40:36.392 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Simulacoes_DataSimulacao" ON "Simulacoes" ("DataSimulacao");
+2025-11-16 16:40:36.397 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Simulacoes_ProdutoId" ON "Simulacoes" ("ProdutoId");
+2025-11-16 16:40:36.700 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted"))
+2025-11-16 16:40:36.712 -03:00 [INF] Seeding database with initial data...
+2025-11-16 16:40:36.996 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 11), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (Size = 13), @p4='?' (DbType = Boolean), @p5='?' (Size = 10), @p6='?' (DbType = Int32), @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Clientes" ("CPF", "CreatedAt", "DataNascimento", "Email", "IsDeleted", "Nome", "PerfilAtual", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING "Id";
+2025-11-16 16:40:37.025 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (Size = 14), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:40:37.030 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (Size = 18), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:40:37.035 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (Size = 19), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:40:37.040 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (Size = 8), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:40:37.046 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (Size = 18), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Decimal), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime), @p11='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Produtos" ("Id", "CreatedAt", "IsDeleted", "Nome", "PerfilRecomendado", "PermiteLiquidez", "PrazoMinimoDias", "Rentabilidade", "Risco", "Tipo", "UpdatedAt", "ValorMinimoAplicacao")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2025-11-16 16:40:37.093 -03:00 [INF] Database seeded successfully with 5 products and 1 client
+2025-11-16 16:40:37.303 -03:00 [INF] Application started successfully
+2025-11-16 16:40:37.372 -03:00 [INF] User profile is available. Using 'C:\Users\lisbi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-16 16:40:37.662 -03:00 [INF] Now listening on: https://localhost:7148
+2025-11-16 16:40:37.664 -03:00 [INF] Now listening on: http://localhost:5199
+2025-11-16 16:40:37.802 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 16:40:37.804 -03:00 [INF] Hosting environment: Development
+2025-11-16 16:40:37.805 -03:00 [INF] Content root path: C:\Desenvolvimento\CSharp\InvesteCaixa\src\InvestCaixa.API
+2025-11-16 16:40:57.288 -03:00 [INF] Request starting HTTP/2 POST https://localhost:7148/api/perfil-financeiro/1 - application/json 203
+2025-11-16 16:40:57.616 -03:00 [INF] CORS policy execution successful.
+2025-11-16 16:40:57.626 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API)'
+2025-11-16 16:40:57.682 -03:00 [INF] Route matched with {action = "CriarPerfilFinanceiro", controller = "PerfilFinanceiro"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CriarPerfilFinanceiro(Int32, InvestCaixa.Application.DTOs.Request.CriarPerfilFinanceiroRequest, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilFinanceiroController (InvestCaixa.API).
+2025-11-16 16:40:57.940 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."CPF", "c"."CreatedAt", "c"."DataNascimento", "c"."Email", "c"."IsDeleted", "c"."Nome", "c"."PerfilAtual", "c"."UpdatedAt"
+FROM "Clientes" AS "c"
+WHERE NOT ("c"."IsDeleted") AND "c"."Id" = @__p_0
+LIMIT 1
+2025-11-16 16:40:58.066 -03:00 [INF] Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Decimal), @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "PerfisFinanceiros" ("Id", "ClienteId", "CreatedAt", "DependentesFinanceiros", "DividasAtivas", "ExperienciaInvestimentos", "Horizonte", "IsDeleted", "Objetivo", "PatrimonioTotal", "RendaMensal", "ToleranciaPerda", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2025-11-16 16:40:58.082 -03:00 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType0`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 16:40:58.131 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API) in 437.9285ms
+2025-11-16 16:40:58.135 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilFinanceiroController.CriarPerfilFinanceiro (InvestCaixa.API)'
+2025-11-16 16:40:58.140 -03:00 [INF] Request POST /api/perfil-financeiro/1 completado em 515ms com status 201
+2025-11-16 16:40:58.151 -03:00 [INF] HTTP POST /api/perfil-financeiro/1 responded 201 in 751.5017 ms
+2025-11-16 16:40:58.161 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7148/api/perfil-financeiro/1 - 201 null application/json; charset=utf-8 884.8247ms
+2025-11-16 16:41:06.785 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7148/api/perfil-risco/1 - null null
+2025-11-16 16:41:06.815 -03:00 [INF] Executing endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API)'
+2025-11-16 16:41:06.829 -03:00 [INF] Route matched with {action = "ObterPerfilRisco", controller = "PerfilRisco"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterPerfilRisco(Int32, System.Threading.CancellationToken) on controller InvestCaixa.API.Controllers.PerfilRiscoController (InvestCaixa.API).
+2025-11-16 16:41:06.837 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-16 16:41:06.980 -03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-16 16:41:06.984 -03:00 [INF] Obtendo perfil de risco para cliente 1
+2025-11-16 16:41:07.046 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."CPF", "c"."CreatedAt", "c"."DataNascimento", "c"."Email", "c"."IsDeleted", "c"."Nome", "c"."PerfilAtual", "c"."UpdatedAt"
+FROM "Clientes" AS "c"
+WHERE NOT ("c"."IsDeleted") AND "c"."Id" = @__p_0
+LIMIT 1
+2025-11-16 16:41:07.072 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__clienteId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClienteId", "p"."CreatedAt", "p"."Descricao", "p"."FrequenciaMovimentacoes", "p"."IsDeleted", "p"."Perfil", "p"."Pontuacao", "p"."PrefereLiquidez", "p"."UpdatedAt", "p"."VolumeInvestimentos"
+FROM "PerfisRisco" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."ClienteId" = @__clienteId_0
+LIMIT 1
+2025-11-16 16:41:07.190 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__clienteId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "s"."Id", "s"."ClienteId", "s"."CreatedAt", "s"."DataSimulacao", "s"."IsDeleted", "s"."PrazoMeses", "s"."ProdutoId", "s"."ProdutoSimulado", "s"."RentabilidadeCalculada", "s"."UpdatedAt", "s"."ValorFinal", "s"."ValorInvestido", "t"."Id", "t"."CreatedAt", "t"."IsDeleted", "t"."Nome", "t"."PerfilRecomendado", "t"."PermiteLiquidez", "t"."PrazoMinimoDias", "t"."Rentabilidade", "t"."Risco", "t"."Tipo", "t"."UpdatedAt", "t"."ValorMinimoAplicacao", "t0"."Id", "t0"."CPF", "t0"."CreatedAt", "t0"."DataNascimento", "t0"."Email", "t0"."IsDeleted", "t0"."Nome", "t0"."PerfilAtual", "t0"."UpdatedAt"
+FROM "Simulacoes" AS "s"
+INNER JOIN (
+    SELECT "p"."Id", "p"."CreatedAt", "p"."IsDeleted", "p"."Nome", "p"."PerfilRecomendado", "p"."PermiteLiquidez", "p"."PrazoMinimoDias", "p"."Rentabilidade", "p"."Risco", "p"."Tipo", "p"."UpdatedAt", "p"."ValorMinimoAplicacao"
+    FROM "Produtos" AS "p"
+    WHERE NOT ("p"."IsDeleted")
+) AS "t" ON "s"."ProdutoId" = "t"."Id"
+INNER JOIN (
+    SELECT "c"."Id", "c"."CPF", "c"."CreatedAt", "c"."DataNascimento", "c"."Email", "c"."IsDeleted", "c"."Nome", "c"."PerfilAtual", "c"."UpdatedAt"
+    FROM "Clientes" AS "c"
+    WHERE NOT ("c"."IsDeleted")
+) AS "t0" ON "s"."ClienteId" = "t0"."Id"
+WHERE NOT ("s"."IsDeleted") AND "s"."ClienteId" = @__clienteId_0
+ORDER BY "s"."DataSimulacao" DESC
+2025-11-16 16:41:07.211 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__clienteId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClienteId", "p"."CreatedAt", "p"."DependentesFinanceiros", "p"."DividasAtivas", "p"."ExperienciaInvestimentos", "p"."Horizonte", "p"."IsDeleted", "p"."Objetivo", "p"."PatrimonioTotal", "p"."RendaMensal", "p"."ToleranciaPerda", "p"."UpdatedAt"
+FROM "PerfisFinanceiros" AS "p"
+WHERE NOT ("p"."IsDeleted") AND "p"."ClienteId" = @__clienteId_0 AND NOT ("p"."IsDeleted")
+LIMIT 1
+2025-11-16 16:41:07.272 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (Size = 65), @p4='?' (DbType = Int32), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "PerfisRisco" ("Id", "ClienteId", "CreatedAt", "Descricao", "FrequenciaMovimentacoes", "IsDeleted", "Perfil", "Pontuacao", "PrefereLiquidez", "UpdatedAt", "VolumeInvestimentos")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2025-11-16 16:41:07.291 -03:00 [INF] Executing OkObjectResult, writing value of type 'InvestCaixa.Application.DTOs.Response.PerfilRiscoResponse'.
+2025-11-16 16:41:07.299 -03:00 [INF] Executed action InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API) in 467.4187ms
+2025-11-16 16:41:07.302 -03:00 [INF] Executed endpoint 'InvestCaixa.API.Controllers.PerfilRiscoController.ObterPerfilRisco (InvestCaixa.API)'
+2025-11-16 16:41:07.304 -03:00 [INF] Request GET /api/perfil-risco/1 completado em 489ms com status 200
+2025-11-16 16:41:07.307 -03:00 [INF] HTTP GET /api/perfil-risco/1 responded 200 in 506.9617 ms
+2025-11-16 16:41:07.310 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7148/api/perfil-risco/1 - 200 null application/json; charset=utf-8 525.8946ms

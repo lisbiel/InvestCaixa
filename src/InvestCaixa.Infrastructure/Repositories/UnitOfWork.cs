@@ -9,6 +9,8 @@ public class UnitOfWork : IUnitOfWork
     private ISimulacaoRepository? _simulacaoRepository;
     private IProdutoRepository? _produtoRepository;
     private IClienteRepository? _clienteRepository;
+    private IInvestimentoFinalizadoRepository? _investimentoFinalizadoRepository;
+    private IPerfilFinanceiroRepository? _perfilFinanceiroRepository;
 
     public UnitOfWork(InvestimentoDbContext context)
     {
@@ -23,6 +25,11 @@ public class UnitOfWork : IUnitOfWork
 
     public IClienteRepository ClienteRepository => 
         _clienteRepository ??= new ClienteRepository(_context);
+
+    public IInvestimentoFinalizadoRepository InvestimentoFinalizadoRepository => 
+        _investimentoFinalizadoRepository ??= new InvestimentoFinalizadoRepository(_context);
+    public IPerfilFinanceiroRepository PerfilFinanceiroRepository => 
+        _perfilFinanceiroRepository ??= new PerfilFinanceiroRepository(_context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
