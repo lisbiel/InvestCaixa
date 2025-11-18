@@ -6,4 +6,5 @@ public interface IClienteRepository : IRepositoryInt<Cliente>
     Task<Cliente?> ObterPorEmailAsync(string email, CancellationToken cancellationToken = default);
     Task<PerfilRisco?> ObterPerfilRiscoAsync(int clienteId, CancellationToken cancellationToken = default);
     Task AdicionarPerfilRiscoAsync(PerfilRisco perfilRisco, CancellationToken cancellationToken = default);
+    Task AtualizarPerfilRiscoAsync(PerfilRisco perfilRisco, CancellationToken cancellationToken = default);
 }

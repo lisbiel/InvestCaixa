@@ -47,4 +47,12 @@ public class ClienteRepository : RepositoryInt<Cliente>, IClienteRepository
     {
         await _context.PerfisRisco.AddAsync(perfilRisco, cancellationToken);
     }
+
+    public Task AtualizarPerfilRiscoAsync(
+        PerfilRisco perfilRisco,
+        CancellationToken cancellationToken = default)
+    {
+        _context.PerfisRisco.Update(perfilRisco);
+        return Task.CompletedTask;
+    }
 }

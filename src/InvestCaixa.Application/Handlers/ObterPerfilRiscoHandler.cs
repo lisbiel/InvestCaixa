@@ -4,6 +4,7 @@ using AutoMapper;
 using InvestCaixa.Application.DTOs.Response;
 using InvestCaixa.Application.Handlers.Queries;
 using InvestCaixa.Domain.Entities;
+using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Exceptions;
 using InvestCaixa.Domain.Interfaces;
 using MediatR;
@@ -43,6 +44,29 @@ public class ObterPerfilRiscoQueryHandler : IRequestHandler<ObterPerfilRiscoQuer
         if (perfilRisco == null)
         {
             perfilRisco = await CalcularPerfilInicialAsync(request.ClienteId, cancellationToken);
+        } else 
+        {
+            var perfilFinanceiro = await _unitOfWork.PerfilFinanceiroRepository
+                .ObterPorClienteAsync(request.ClienteId, cancellationToken);
+
+            if (perfilFinanceiro != null &&
+                perfilFinanceiro.UpdatedAt > perfilRisco.UpdatedAt)
+            {
+                var novoPerfilRisco = new PerfilRisco(
+                    request.ClienteId,
+                    perfilRisco.VolumeInvestimentos,
+                    perfilRisco.FrequenciaMovimentacoes,
+                    perfilRisco.PrefereLiquidez,
+                    perfilFinanceiro);
+                if(novoPerfilRisco != perfilRisco)
+                {
+                    perfilRisco.AtualizarPerfil(perfilFinanceiro);
+                    await _unitOfWork.ClienteRepository.AtualizarPerfilRiscoAsync(perfilRisco, cancellationToken);
+                    await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                    _logger.LogInformation("Perfil de risco atualizado para cliente {ClienteId}", request.ClienteId);
+                }
+            }
         }
 
         return _mapper.Map<PerfilRiscoResponse>(perfilRisco);
@@ -54,6 +78,8 @@ public class ObterPerfilRiscoQueryHandler : IRequestHandler<ObterPerfilRiscoQuer
     {
         var simulacoes = await _unitOfWork.SimulacaoRepository
             .ObterPorClienteAsync(clienteId, cancellationToken);
+
+        PerfilInvestidor perfil;
 
         var volumeTotal = simulacoes.Sum(s => s.ValorInvestido);
         var frequencia = simulacoes.Count();

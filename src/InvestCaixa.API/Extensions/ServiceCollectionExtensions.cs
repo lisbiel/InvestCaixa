@@ -18,10 +18,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using StackExchange.Redis;
 using System;
 using System.Reflection;
 using System.Text;
-using StackExchange.Redis;
+using System.Text.Json.Serialization;
 
 public static class ServiceCollectionExtensions
 {
@@ -106,7 +107,11 @@ public static class ServiceCollectionExtensions
             });
         });
 
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            }); ;
         return services;
     }
 

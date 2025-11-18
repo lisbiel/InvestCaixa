@@ -42,4 +42,27 @@ public class PerfilFinanceiro : BaseEntity
         ToleranciaPerda = toleranciaPerda;
         ExperienciaInvestimentos = experiencia;
     }
+
+    public void AtualizarDados(
+        decimal rendaMensal,
+        decimal patrimonioTotal,
+        decimal dividasAtivas,
+        int dependentes,
+        HorizonteInvestimento horizonte,
+        ObjetivoInvestimento objetivo,
+        int toleranciaPerda,
+        bool experiencia)
+    {
+        if (rendaMensal <= 0) throw new DomainException("Renda deve ser positiva");
+        if (patrimonioTotal < 0) throw new DomainException("Patrimônio não pode ser negativo");
+        if (toleranciaPerda < 0 || toleranciaPerda > 10) throw new DomainException("Tolerância deve estar entre 0 e 10");
+        RendaMensal = rendaMensal;
+        PatrimonioTotal = patrimonioTotal;
+        DividasAtivas = dividasAtivas;
+        DependentesFinanceiros = dependentes;
+        Horizonte = horizonte;
+        Objetivo = objetivo;
+        ToleranciaPerda = toleranciaPerda;
+        ExperienciaInvestimentos = experiencia;
+    }
 }

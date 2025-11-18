@@ -38,26 +38,66 @@ public class PerfilFinanceiroController : ControllerBase
         var cliente = await _unitOfWork.ClienteRepository.GetByIdAsync(clienteId, cancellationToken);
         if (cliente is null) return NotFound("Cliente não encontrado");
 
-        var perfilExistente = await _unitOfWork.ClienteRepository.ObterPerfilRiscoAsync(clienteId, cancellationToken);
+        var perfilFinanceiroExistente = await _unitOfWork.PerfilFinanceiroRepository.ObterPorClienteAsync(clienteId, cancellationToken);
 
-        var perfil = new PerfilFinanceiro(
-            clienteId,
-            request.RendaMensal,
-            request.PatrimonioTotal,
-            request.DividasAtivas,
-            request.DependentesFinanceiros,
-            (HorizonteInvestimento)request.Horizonte,
-            (ObjetivoInvestimento)request.Objetivo,
-            request.ToleranciaPerda,
-            request.ExperienciaInvestimentos);
+        var perfilRiscoExistente = await _unitOfWork.ClienteRepository.ObterPerfilRiscoAsync(clienteId, cancellationToken);
 
-        perfilExistente.AtualizarPerfil(perfil);
+        PerfilFinanceiro perfilFinanceiro;
+        var isNovoPerfil = false;
 
-        await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfil, cancellationToken);
+        if (perfilFinanceiroExistente != null)
+        {
+            perfilFinanceiroExistente.AtualizarDados(
+                request.RendaMensal,
+                request.PatrimonioTotal,
+                request.DividasAtivas,
+                request.DependentesFinanceiros,
+                (HorizonteInvestimento)request.Horizonte,
+                (ObjetivoInvestimento)request.Objetivo,
+                request.ToleranciaPerda,
+                request.ExperienciaInvestimentos);
+
+            perfilFinanceiro = perfilFinanceiroExistente;
+            await _unitOfWork.PerfilFinanceiroRepository.UpdateAsync(perfilFinanceiro, cancellationToken);
+        }
+        else
+        {
+            perfilFinanceiro = new PerfilFinanceiro(
+                clienteId,
+                request.RendaMensal,
+                request.PatrimonioTotal,
+                request.DividasAtivas,
+                request.DependentesFinanceiros,
+                (HorizonteInvestimento)request.Horizonte,
+                (ObjetivoInvestimento)request.Objetivo,
+                request.ToleranciaPerda,
+                request.ExperienciaInvestimentos);
+            await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfilFinanceiro, cancellationToken);
+            isNovoPerfil = true;
+
+            await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfilFinanceiro, cancellationToken);
+            isNovoPerfil = true;
+        }
+
+        if (perfilRiscoExistente != null)
+        {
+            perfilRiscoExistente.AtualizarPerfil(perfilFinanceiro);
+            await _unitOfWork.ClienteRepository.AtualizarPerfilRiscoAsync(perfilRiscoExistente, cancellationToken);
+        }
+        else
+        {
+            var novoPerfilRisco = new PerfilRisco(
+                clienteId,
+                volumeInvestimentos: 0,
+                frequenciaMovimentacoes: 0,
+                prefereLiquidez: true);
+
+            novoPerfilRisco.AtualizarPerfil(perfilFinanceiro);
+            await _unitOfWork.ClienteRepository.AdicionarPerfilRiscoAsync(novoPerfilRisco, cancellationToken);
+        }
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-
-
-        return CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfil.Id });
+        return isNovoPerfil ? CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfilFinanceiro.Id }) : Ok(new {message = "Perfil financeiro e de risco atualizados com sucesso", perfilFinanceiro});
     }
 }
