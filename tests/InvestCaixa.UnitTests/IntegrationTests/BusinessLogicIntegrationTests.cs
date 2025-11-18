@@ -187,7 +187,7 @@ public class BusinessLogicIntegrationTests
     }
 
     [Fact]
-    public async Task HistoricoSimulacoes_DeveAgrupaPorProdutoEDia()
+        public async Task HistoricoSimulacoes_DeveAgrupaPorProdutoEDia()
     {
         // Arrange - Criar múltiplas simulações
         for (int i = 0; i < 5; i++)

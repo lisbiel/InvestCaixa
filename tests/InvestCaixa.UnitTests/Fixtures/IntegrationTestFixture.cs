@@ -1,6 +1,7 @@
 namespace InvestCaixa.UnitTests.Fixtures;
 
 using InvestCaixa.API;
+using InvestCaixa.Application.Interfaces;
 using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using InvestCaixa.Infrastructure.Data;
@@ -45,9 +46,9 @@ public class IntegrationTestFixture : IAsyncLifetime
 
         var claims = new[]
         {
-        new Claim(JwtRegisteredClaimNames.Sub, "admin"),
-        new Claim("name", "admin")
-    };
+            new Claim(JwtRegisteredClaimNames.Sub, "admin"),
+            new Claim("name", "admin")
+        };
 
         var token = new JwtSecurityToken(
             issuer: issuer,
@@ -88,8 +89,12 @@ public class IntegrationTestFixture : IAsyncLifetime
 
         dbContext.Produtos.AddRange(produtos);
 
-        var cliente = new Cliente("João Silva", "joao@test.com", "12345678901", DateTime.Now.AddYears(-40));
-        dbContext.Clientes.Add(cliente);
+        var clientes = new List<Cliente>
+        {
+            new ("João Silva", "joao@test.com", "12345678901", DateTime.Now.AddYears(-40)),
+            new ("João Sousa", "joaos@test.com", "10987654321", DateTime.Now.AddYears(-20))
+        };
+        dbContext.Clientes.AddRange(clientes);
 
         await dbContext.SaveChangesAsync();
     }
@@ -101,6 +106,10 @@ public class IntegrationTestFixture : IAsyncLifetime
 
         dbContext.Simulacoes.RemoveRange(dbContext.Simulacoes);
         dbContext.PerfisRisco.RemoveRange(dbContext.PerfisRisco);
+
+        
+        var cache = scope.ServiceProvider.GetRequiredService<ICacheService>();
+
         await dbContext.SaveChangesAsync();
     }
 
@@ -115,6 +124,15 @@ public class IntegrationTestFixture : IAsyncLifetime
     {
         // Novo client sem Authorization, mas com BaseAddress correto
         return _factory.CreateClient();
+    }
+
+    /// <summary>
+    /// Limpa o cache manualmente (útil entre testes para evitar cache cross-test).
+    /// </summary>
+    public async Task LimparCacheAsync()
+    {
+        using var scope = _factory.Services.CreateScope();
+        var cache = scope.ServiceProvider.GetRequiredService<ICacheService>();
     }
 }
 

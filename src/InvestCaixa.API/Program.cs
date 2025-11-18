@@ -4,6 +4,7 @@ using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using Serilog;
 using System.Diagnostics.CodeAnalysis;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,41 @@ Log.Information("Application started successfully");
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+    ResultStatusCodes =
+    {
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy] = 200,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded] = 500,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy] = 503
+    }
+});
+
+app.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready"),
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+    ResultStatusCodes =
+    {
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy] = 200,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded] = 500,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy] = 503
+    }
+});
+
+app.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("live"),
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+    ResultStatusCodes =
+    {
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy] = 200,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded] = 500,
+        [Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy] = 503
+    }
+});
 
 await app.RunAsync();
 

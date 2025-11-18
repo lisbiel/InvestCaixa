@@ -10,6 +10,7 @@ using InvestCaixa.Application.Services;
 using InvestCaixa.Application.Validators;
 using InvestCaixa.Domain.Interfaces;
 using InvestCaixa.Infrastructure.Data;
+using InvestCaixa.Infrastructure.HealthChecks;
 using InvestCaixa.Infrastructure.Repositories;
 using InvestCaixa.Infrastructure.Repositories.Decorators;
 using InvestCaixa.Infrastructure.Services;
@@ -159,9 +160,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDateTimeService, DateTimeService>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
 
-        var redisConnectionString = configuration.GetConnectionString("Redis")
-            ?? throw new InvalidOperationException("Redis connection string não encontrada em appsettings.json");
-
         services.AddMemoryCache();
 
         var redisConnection = configuration.GetConnectionString("Redis")
@@ -172,6 +170,11 @@ public static class ServiceCollectionExtensions
             options.Configuration = redisConnection;
             options.InstanceName = "InvestCaixa_";
         });
+
+        services.AddHealthChecks()
+            .AddDbContextCheck<InvestimentoDbContext>("Database", tags: new[] { "db", "ready" })
+            .AddRedis(redisConnection, "Redis", tags: new[] {"cache", "ready"})
+            .AddCheck<ApplicationHealthChecks>("application", tags: new[] {"app", "live"});
 
         return services;
     }
