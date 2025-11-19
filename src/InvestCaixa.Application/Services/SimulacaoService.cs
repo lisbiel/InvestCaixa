@@ -11,6 +11,7 @@ using InvestCaixa.Domain.Interfaces;
 using InvestCaixa.Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using InvestCaixa.Application.Extensions;
 
 public class SimulacaoService : ISimulacaoService
 {
@@ -82,7 +83,7 @@ public class SimulacaoService : ISimulacaoService
             },
             DataSimulacao = DateTime.UtcNow,
             Disclaimer = disclaimer,
-            AdequacaoPerfil = adequacaoPerfil
+            AdequacaoPerfil = adequacaoPerfil.GetDescription()
         };
     }
 
