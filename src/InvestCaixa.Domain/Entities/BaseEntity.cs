@@ -1,3 +1,7 @@
+using InvestCaixa.Domain.Primitives;
+using MediatR;
+using System.Collections.ObjectModel;
+
 namespace InvestCaixa.Domain.Entities;
 
 /// <summary>
@@ -9,6 +13,10 @@ public abstract class BaseEntity<TKey> where TKey : notnull
     public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; protected set; }
     public bool IsDeleted { get; protected set; } = false;
+
+    // Coleção de eventos de domínio
+    private readonly List<IDomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => new ReadOnlyCollection<IDomainEvent>(_domainEvents);
 
     protected BaseEntity() { }
 
@@ -23,6 +31,20 @@ public abstract class BaseEntity<TKey> where TKey : notnull
         IsDeleted = true;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent)
+    {
+        if (domainEvent is null) return;
+        _domainEvents.Add(domainEvent);
+    }
+
+    protected void RemoveDomainEvent(IDomainEvent domainEvent)
+    {
+        if (domainEvent is null) return;
+        _domainEvents.Remove(domainEvent);
+    }
+
+    protected void ClearDomainEvents() => _domainEvents.Clear();
 }
 
 /// <summary>

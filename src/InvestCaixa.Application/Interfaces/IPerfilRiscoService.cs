@@ -11,4 +11,8 @@ public interface IPerfilRiscoService
     Task<IEnumerable<ProdutoResponse>> ObterProdutosRecomendadosAsync(
         Domain.Enums.PerfilInvestidor perfil,
         CancellationToken cancellationToken = default);
+
+    Task AtualizarPerfilAsync(
+        int clienteId,
+        CancellationToken cancellationToken = default);
 }

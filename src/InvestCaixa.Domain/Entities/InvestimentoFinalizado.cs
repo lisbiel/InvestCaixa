@@ -1,4 +1,6 @@
-﻿namespace InvestCaixa.Domain.Entities;
+﻿using InvestCaixa.Domain.Events;
+using MediatR;
+namespace InvestCaixa.Domain.Entities;
 
 public class InvestimentoFinalizado : BaseEntity
 {
@@ -9,6 +11,7 @@ public class InvestimentoFinalizado : BaseEntity
     public DateTime DataAplicacao { get; private set; }
     public DateTime? DataResgate { get; private set; }
     public StatusInvestimento Status { get; private set; }
+    public int PrazoMeses { get; private set; }
     public virtual Cliente Cliente { get; private set; } = null!;
     public virtual ProdutoInvestimento Produto { get; private set; } = null!;
 
@@ -23,6 +26,24 @@ public class InvestimentoFinalizado : BaseEntity
         DataAplicacao = dataAplicacao;
         Status = StatusInvestimento.Ativo;
         ValorResgatado = 0;
+
+        RaiseDomainEvent(new InvestimentoFInalizadoEvent(
+            Id, ClienteId, ProdutoId, ValorAplicado, DataAplicacao));
+    }
+
+    public InvestimentoFinalizado(int clienteId, Guid produtoId, decimal valorAplicado, DateTime dataAplicacao, int prazoMeses)
+    {
+        if (valorAplicado <= 0) throw new DomainException("Valor aplicado deve ser positivo");
+        ClienteId = clienteId;
+        ProdutoId = produtoId;
+        ValorAplicado = valorAplicado;
+        DataAplicacao = dataAplicacao;
+        Status = StatusInvestimento.Ativo;
+        ValorResgatado = 0;
+        PrazoMeses = prazoMeses;
+
+        RaiseDomainEvent(new InvestimentoFInalizadoEvent(
+            Id, ClienteId, ProdutoId, ValorAplicado, DataAplicacao));
     }
 
     public void Resgatar(decimal valorResgatado)

@@ -121,4 +121,6 @@ public class PerfilRisco : BaseEntity
     {
         CalcularPerfil(dadosFinanceiros);
     }
+
+
 }

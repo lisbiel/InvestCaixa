@@ -31,7 +31,7 @@ public class InvestimentosIntegrationTests
             var produto = new ProdutoInvestimento("CDB Caixa 2026", TipoProduto.CDB, 0.12m, NivelRisco.Baixo, 180, 1000m, true, PerfilInvestidor.Conservador);
             context.Produtos.Add(produto);
             await context.SaveChangesAsync();
-            var request = new FinalizarInvestimentoRequest { ClienteId = 1, ProdutoId = produto.Id, ValorAplicado = 5000m };
+            var request = new FinalizarInvestimentoRequest { ClienteId = 1, ProdutoId = produto.Id, ValorAplicado = 5000m, PrazoMeses = 12 };
 
             var content = new StringContent(
                 JsonSerializer.Serialize(request),

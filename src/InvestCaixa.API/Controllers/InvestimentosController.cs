@@ -32,7 +32,7 @@ public class InvestimentosController : ControllerBase
         [FromBody] FinalizarInvestimentoRequest request,
         CancellationToken cancellationToken)
     {
-        var command = new FinalizarInvestimentoCommand(request.ClienteId, request.ProdutoId, request.ValorAplicado);
+        var command = new FinalizarInvestimentoCommand(request.ClienteId, request.ProdutoId, request.ValorAplicado, request.PrazoMeses);
         var investimentoId = await _mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(Finalizar), new { id = investimentoId });
     }
