@@ -8,6 +8,7 @@ using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Exceptions;
 using InvestCaixa.Domain.Interfaces;
+using InvestCaixa.Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -58,7 +59,9 @@ public class SimulacaoService : ISimulacaoService
             meses,
             DateTime.UtcNow);
 
-        var adequacaoPerfil = CalcularAdequacaoBase(produto.Risco, request.ClienteId);
+        var adequacaoPerfil = await CalcularAdequacaoBase(produto.Risco, request.ClienteId);
+
+        var disclaimer = GerarDisclaimer(produto.Tipo);
 
         await _unitOfWork.SimulacaoRepository.AddAsync(simulacao, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -78,7 +81,21 @@ public class SimulacaoService : ISimulacaoService
                 PrazoMeses = meses
             },
             DataSimulacao = DateTime.UtcNow,
+            Disclaimer = disclaimer,
+            AdequacaoPerfil = adequacaoPerfil
+        };
+    }
 
+    private static DisclaimerRegulatorio GerarDisclaimer(TipoProduto tipo)
+    {
+        return tipo switch
+        {
+            TipoProduto.LCI or TipoProduto.LCA or TipoProduto.TesouroDireto => 
+                DisclaimerRegulatorio.ParaRendaFixa(),
+            TipoProduto.CDB =>
+                DisclaimerRegulatorio.ParaCDB(),
+            TipoProduto.Fundo => 
+                DisclaimerRegulatorio.ParaRendaVariavel(),
         };
     }
 

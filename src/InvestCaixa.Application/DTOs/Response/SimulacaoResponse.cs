@@ -10,7 +10,7 @@ public record SimulacaoResponse
     public ResultadoSimulacaoDto ResultadoSimulacao { get; init; } = null!;
     public DateTime DataSimulacao { get; init; }
     public DisclaimerRegulatorio Disclaimer { get; init; } = null!;
-    public AdequacaoPerfil adequacaoPerfil { get; init; } = AdequacaoPerfil.NaoAvaliado;
+    public AdequacaoPerfil AdequacaoPerfil { get; init; } = AdequacaoPerfil.NaoAvaliado;
 }
 
 public record ProdutoValidadoDto
