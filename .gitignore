@@ -64,3 +64,4 @@ coverage.xml
 # User-specific files
 *.DotSettings.user
 *.userprefs
+/data/invest.db
