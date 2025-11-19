@@ -55,6 +55,12 @@ public class SimulacaoServiceTests
             true,
             PerfilInvestidor.Conservador);
 
+        var perfilRisco = new PerfilRisco(
+            123,
+            1,
+            1,
+            true);
+
         _unitOfWorkMock
             .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(produto);
@@ -66,6 +72,10 @@ public class SimulacaoServiceTests
         _unitOfWorkMock
             .Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
+
+        _unitOfWorkMock
+            .Setup(x => x.ClienteRepository.ObterPerfilRiscoAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(perfilRisco);
 
         _mapperMock
             .Setup(x => x.Map<ProdutoValidadoDto>(It.IsAny<ProdutoInvestimento>()))
