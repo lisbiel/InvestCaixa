@@ -5,9 +5,11 @@ using InvestCaixa.Application.DTOs.Request;
 using InvestCaixa.Application.DTOs.Response;
 using InvestCaixa.Application.Interfaces;
 using InvestCaixa.Domain.Entities;
+using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Exceptions;
 using InvestCaixa.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 public class SimulacaoService : ISimulacaoService
 {
@@ -56,6 +58,8 @@ public class SimulacaoService : ISimulacaoService
             meses,
             DateTime.UtcNow);
 
+        var adequacaoPerfil = CalcularAdequacaoBase(produto.Risco, request.ClienteId);
+
         await _unitOfWork.SimulacaoRepository.AddAsync(simulacao, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
@@ -73,7 +77,8 @@ public class SimulacaoService : ISimulacaoService
                 RentabilidadeEfetiva = rentabilidadeEfetiva,
                 PrazoMeses = meses
             },
-            DataSimulacao = DateTime.UtcNow
+            DataSimulacao = DateTime.UtcNow,
+
         };
     }
 
@@ -106,5 +111,28 @@ public class SimulacaoService : ISimulacaoService
             QuantidadeSimulacoes = r.QuantidadeSimulacoes,
             MediaValorFinal = r.MediaValorFinal
         });
+    }
+
+    private async Task<AdequacaoPerfil> CalcularAdequacaoBase(NivelRisco riscoProduto, int clienteId)
+    {
+        var perfil = await _unitOfWork.ClienteRepository.ObterPerfilRiscoAsync(clienteId);
+        if (perfil == null)
+            return AdequacaoPerfil.NaoAvaliado;
+
+        return (riscoProduto, perfil.Perfil) switch
+        {
+            (NivelRisco.Baixo, PerfilInvestidor.Conservador) => AdequacaoPerfil.Adequado,
+            (NivelRisco.Baixo, PerfilInvestidor.Moderado) => AdequacaoPerfil.InadequadoBaixoRisco,
+            (NivelRisco.Baixo, PerfilInvestidor.Agressivo) => AdequacaoPerfil.InadequadoBaixoRisco,
+
+            (NivelRisco.Medio, PerfilInvestidor.Conservador) => AdequacaoPerfil.InadequadoAltoRisco,
+            (NivelRisco.Medio, PerfilInvestidor.Moderado) => AdequacaoPerfil.Adequado,
+            (NivelRisco.Medio, PerfilInvestidor.Agressivo) => AdequacaoPerfil.Adequado,
+
+            (NivelRisco.Alto, PerfilInvestidor.Conservador) => AdequacaoPerfil.InadequadoAltoRisco,
+            (NivelRisco.Alto, PerfilInvestidor.Moderado) => AdequacaoPerfil.InadequadoAltoRisco,
+            (NivelRisco.Alto, PerfilInvestidor.Agressivo) => AdequacaoPerfil.Adequado,
+            _ => AdequacaoPerfil.NaoAvaliado
+        };
     }
 }

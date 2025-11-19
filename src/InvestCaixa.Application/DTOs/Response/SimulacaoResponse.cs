@@ -1,3 +1,6 @@
+using InvestCaixa.Domain.Enums;
+using InvestCaixa.Domain.ValueObjects;
+
 namespace InvestCaixa.Application.DTOs.Response;
 
 public record SimulacaoResponse
@@ -6,6 +9,8 @@ public record SimulacaoResponse
     public ProdutoValidadoDto ProdutoValidado { get; init; } = null!;
     public ResultadoSimulacaoDto ResultadoSimulacao { get; init; } = null!;
     public DateTime DataSimulacao { get; init; }
+    public DisclaimerRegulatorio Disclaimer { get; init; } = null!;
+    public AdequacaoPerfil adequacaoPerfil { get; init; } = AdequacaoPerfil.NaoAvaliado;
 }
 
 public record ProdutoValidadoDto

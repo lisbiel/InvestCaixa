@@ -53,18 +53,28 @@ public class PerfilRisco : BaseEntity
         // ===== ANÁLISE BÁSICA (HISTÓRICO) =====
 
         // Volume investido (0-30 pontos)
-        if (VolumeInvestimentos < 10_000) pontos += 10;
-        else if (VolumeInvestimentos < 50_000) pontos += 20;
-        else if (VolumeInvestimentos < 100_000) pontos += 25;
-        else pontos += 30;
+        pontos += VolumeInvestimentos switch
+        {
+            >= 1_000_000 => 30,
+            >= 500_000 => 25,
+            >= 100_000 => 20,
+            >= 50_000 => 15,
+            >= 10_000 => 10,
+            _ => 5
+        };
 
         // Frequência (0-20 pontos)
-        if (FrequenciaMovimentacoes < 3) pontos += 5;
-        else if (FrequenciaMovimentacoes < 10) pontos += 12;
-        else pontos += 20;
+        pontos += FrequenciaMovimentacoes switch
+        {
+            >= 20 => 20,
+            >= 10 => 15,
+            >= 5 => 10,
+            >= 1 => 5,
+            _ => 0
+        };
 
         // Liquidez (0-10 pontos)
-        pontos += PrefereLiquidez ? 5 : 10;
+        pontos += PrefereLiquidez ? 3 : 10;
 
         // ===== ANÁLISE AVANÇADA (PERFIL FINANCEIRO) =====
         if (dadosFinanceiros != null)
@@ -74,17 +84,17 @@ public class PerfilRisco : BaseEntity
                 ? VolumeInvestimentos / dadosFinanceiros.PatrimonioTotal
                 : 0;
 
-            if (percentualInvestido < 0.1m) pontos += 5;
-            else if (percentualInvestido < 0.3m) pontos += 10;
-            else pontos += 15;
+            pontos += percentualInvestido switch
+            {
+                >= 0.5m => 15,
+                >= 0.3m => 10,
+                >= 0.25m => 9,
+                >= 0.1m => 5,
+                _ => 2
+            };
 
             // Tolerância a risco (0-15 pontos)
-            pontos += dadosFinanceiros.ToleranciaPerda switch
-            {
-                <= 3 => 5,
-                <= 6 => 10,
-                _ => 15
-            };
+            pontos += (dadosFinanceiros.ToleranciaPerda *15)/10;
 
             // Horizonte de investimento (0-10 pontos)
             pontos += dadosFinanceiros.Horizonte switch
@@ -98,7 +108,6 @@ public class PerfilRisco : BaseEntity
 
         Pontuacao = pontos;
 
-        // ===== CLASSIFICAÇÃO (0-100) =====
         if (pontos <= 35)
         {
             Perfil = PerfilInvestidor.Conservador;
@@ -116,7 +125,6 @@ public class PerfilRisco : BaseEntity
         }
     }
 
-    // Para recalcular quando houver atualização de dados
     public void AtualizarPerfil(PerfilFinanceiro? dadosFinanceiros)
     {
         CalcularPerfil(dadosFinanceiros);
