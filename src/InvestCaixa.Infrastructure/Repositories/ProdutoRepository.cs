@@ -22,6 +22,7 @@ public class ProdutoRepository : Repository<ProdutoInvestimento>, IProdutoReposi
         return await _dbSet
             .Where(p => p.Tipo == tipoProduto)
             .AsNoTracking()
+            .OrderByDescending(p => p.Rentabilidade)
             .FirstOrDefaultAsync(cancellationToken);
     }
 

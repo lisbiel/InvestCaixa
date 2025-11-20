@@ -59,7 +59,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
 
-        if(_environment?.IsDevelopment() != null)
+        if(_environment != null && _environment.IsDevelopment())
         {
             problemDetails.Extensions["stackTrace"] = exception.StackTrace;
             problemDetails.Extensions["innerException"] = exception.InnerException?.Message;

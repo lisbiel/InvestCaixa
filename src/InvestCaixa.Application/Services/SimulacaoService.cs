@@ -39,6 +39,12 @@ public class SimulacaoService : ISimulacaoService
         var produto = await _unitOfWork.ProdutoRepository
             .ObterPorTipoAsync(request.TipoProduto, cancellationToken);
 
+        var client = await _unitOfWork.ClienteRepository
+            .GetByIdAsync(request.ClienteId, cancellationToken);
+
+        if (client == null)
+            throw new NotFoundException($"Cliente com ID {request.ClienteId} não encontrado");
+
         if (produto == null)
             throw new NotFoundException($"Produto do tipo {request.TipoProduto} não encontrado");
 
