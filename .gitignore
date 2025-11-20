@@ -67,3 +67,7 @@ coverage.xml
 /data/invest.db
 *.db-shm
 *.db-wal
+/src/InvestCaixa.API/InvestCaixa.db
+/ANALISE_PROJETO_0A10.md
+/coverageHtml
+/src/InvestCaixa.API/Logs
