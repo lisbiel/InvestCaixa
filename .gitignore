@@ -65,3 +65,5 @@ coverage.xml
 *.DotSettings.user
 *.userprefs
 /data/invest.db
+*.db-shm
+*.db-wal
