@@ -40,8 +40,6 @@ public class PerfilFinanceiroController : ControllerBase
 
         var perfilFinanceiroExistente = await _unitOfWork.PerfilFinanceiroRepository.ObterPorClienteAsync(clienteId, cancellationToken);
 
-        var perfilRiscoExistente = await _unitOfWork.ClienteRepository.ObterPerfilRiscoAsync(clienteId, cancellationToken);
-
         PerfilFinanceiro perfilFinanceiro;
         var isNovoPerfil = false;
 
@@ -74,29 +72,11 @@ public class PerfilFinanceiroController : ControllerBase
                 request.ExperienciaInvestimentos);
             await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfilFinanceiro, cancellationToken);
             isNovoPerfil = true;
-
-            await _unitOfWork.PerfilFinanceiroRepository.AddAsync(perfilFinanceiro, cancellationToken);
-            isNovoPerfil = true;
-        }
-
-        if (perfilRiscoExistente != null)
-        {
-            perfilRiscoExistente.AtualizarPerfil(perfilFinanceiro);
-            await _unitOfWork.ClienteRepository.AtualizarPerfilRiscoAsync(perfilRiscoExistente, cancellationToken);
-        }
-        else
-        {
-            var novoPerfilRisco = new PerfilRisco(
-                clienteId,
-                volumeInvestimentos: 0,
-                frequenciaMovimentacoes: 0,
-                prefereLiquidez: true);
-
-            novoPerfilRisco.AtualizarPerfil(perfilFinanceiro);
-            await _unitOfWork.ClienteRepository.AdicionarPerfilRiscoAsync(novoPerfilRisco, cancellationToken);
         }
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await _perfilRiscoService.AtualizarPerfilAsync(clienteId,cancellationToken);
 
         return isNovoPerfil ? CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfilFinanceiro.Id }) : Ok(new {message = "Perfil financeiro e de risco atualizados com sucesso", perfilFinanceiro});
     }

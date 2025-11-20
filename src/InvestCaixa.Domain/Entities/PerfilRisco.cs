@@ -104,6 +104,8 @@ public class PerfilRisco : BaseEntity
                 HorizonteInvestimento.LongoPrazo => 10,
                 _ => 5
             };
+
+            pontos *= dadosFinanceiros.ExperienciaInvestimentos ? 10 : 0;
         }
 
         Pontuacao = pontos;

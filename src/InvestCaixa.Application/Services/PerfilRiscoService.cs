@@ -112,6 +112,8 @@ public class PerfilRiscoService : IPerfilRiscoService
                     perfilAtualizado.Perfil,
                     perfilExistente.Pontuacao,
                     perfilAtualizado.Pontuacao);
+                await _unitOfWork.ClienteRepository
+                    .AtualizarPerfilRiscoAsync(perfilExistente);
             }
             else
             {
@@ -156,8 +158,6 @@ public class PerfilRiscoService : IPerfilRiscoService
 
         var prefereLiquidez = CalcularPreferenciaLiquidez(simulacoes, investimentosFinalizados);
 
-        var perfilRisco = AnaliseRiscoCOmportamental(simulacoes, investimentosFinalizados);
-
         var perfil = new PerfilRisco(
             clienteId,
             volumeTotal,
@@ -166,43 +166,6 @@ public class PerfilRiscoService : IPerfilRiscoService
             perfilFinanceiro);
 
         return perfil;
-    }
-
-    private object AnaliseRiscoCOmportamental(IEnumerable<Simulacao> simulacoes, IEnumerable<InvestimentoFinalizado> investimentosFinalizados)
-    {
-        var pontoRisco = 0;
-
-        pontoRisco += simulacoes.Count(s => s.Produto.Risco == NivelRisco.Baixo) * 1;
-        pontoRisco += simulacoes.Count(s => s.Produto.Risco == NivelRisco.Medio) * 2;
-        pontoRisco += simulacoes.Count(s => s.Produto.Risco == NivelRisco.Alto) * 3;
-
-        //Peso maior para investimentos reais sem ignorar as simulações
-        pontoRisco += investimentosFinalizados.Count(i => i.Produto.Risco == NivelRisco.Baixo) * 2;
-        pontoRisco += investimentosFinalizados.Count(i => i.Produto.Risco == NivelRisco.Medio) * 4;
-        pontoRisco += investimentosFinalizados.Count(i => i.Produto.Risco == NivelRisco.Alto) * 6;
-        
-        var tipoSimulados = simulacoes
-            .Select(s => s.Produto.Tipo)
-            .Distinct()
-            .Count();
-
-        var tiposInvestidos = investimentosFinalizados
-            .Select(i => i.Produto.Tipo)
-            .Distinct()
-            .Count();
-        pontoRisco += (tipoSimulados + tiposInvestidos) * 2;
-
-        var totalOperacoes = simulacoes.Count() + investimentosFinalizados.Count();
-        if (totalOperacoes == 0) return PerfilInvestidor.Conservador;
-
-        var mediaRisco = pontoRisco / totalOperacoes;
-
-        return mediaRisco switch
-        {
-            <= 2 => PerfilInvestidor.Conservador,
-            > 2 and <= 4 => PerfilInvestidor.Moderado,
-            _ => PerfilInvestidor.Agressivo,
-        };
     }
 
     private static bool CalcularPreferenciaLiquidez(IEnumerable<Simulacao> simulacoes, IEnumerable<InvestimentoFinalizado> investimentosFinalizados)
