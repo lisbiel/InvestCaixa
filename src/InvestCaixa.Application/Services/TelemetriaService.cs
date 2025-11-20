@@ -103,7 +103,8 @@ public class TelemetriaService : ITelemetriaService
         {
             TaxaSucessoGeral = servicos.Average(s => s.TaxaSucesso),
             TempoRespostaMedioMs = servicos.Average(s => s.MediaTempoRespostaMs),
-            StatusGeral = servicos.Any(s => s.TaxaSucesso < 80) ? "Degradado" : "Saudável"
+            //evita degradar com poucas chamadas
+            StatusGeral = servicos.Any(s => s.TaxaSucesso < 80) && servicos.Sum(p => p.QuantidadeChamadas) > 500 ? "Degradado" : "Saudável"
         };
     }
 
