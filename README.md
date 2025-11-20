@@ -191,18 +191,18 @@ Para desenvolvimento local, crie `appsettings.Development.json` (SQLite local):
 - ⚠️ **Redis** é opcional - sem configuração, usa cache em memória
 - 🔧 **SQL Server** apenas no Docker
 
-#### 4. Migrations de Banco de Dados (SQLite Local)
+#### 4. Banco de Dados (Criado Automaticamente)
 ```bash
-# Navegue para o projeto API
-cd src/InvestCaixa.API
+# NÃO precisa rodar migrations manualmente!
+# O banco é criado automaticamente ao iniciar a aplicação
 
-# Aplique as migrations para criar o banco SQLite
-dotnet ef database update --project ../InvestCaixa.Infrastructure
+# Se houver problemas com o banco SQLite:
+# 1. Pare a aplicação
+# 2. Exclua o arquivo do banco
+rm src/InvestCaixa.API/InvestCaixa.db  # Linux/Mac
+del src\InvestCaixa.API\InvestCaixa.db  # Windows
 
-# Ou no Console do Gerenciador de Pacotes
-Update-Database
-
-# O arquivo InvestCaixa.db será criado automaticamente na pasta da API
+# 3. Reinicie a aplicação - o banco será recriado com dados de exemplo
 ```
 
 #### 5. Inicie a API
@@ -347,7 +347,7 @@ CLIENTE                         SERVIDOR API
   ├─── 1. Login (usuário/senha) ───→
   │                              ├─ Validar credenciais
   │    ← 2. JWT + Refresh Token ──┤
-  │                              └─ Cachear refresh token em Redis
+  │                              └─ Salvar refresh token no banco
   │
   ├─── 3. Requisição API + Bearer JWT ───→
   │                              ├─ Validar assinatura JWT
@@ -357,9 +357,9 @@ CLIENTE                         SERVIDOR API
   │ (JWT expira após 60 minutos)
   │
   ├─── 5. Requisição Refresh Token ───→
-  │                              ├─ Verificar Redis para token válido
+  │                              ├─ Verificar banco para token válido
   │    ← 6. Novo JWT + Refresh Token ──┤
-  │                              └─ Atualizar cache Redis
+  │                              └─ Atualizar banco de dados
 ```
 
 ### Endpoint de Login
@@ -428,11 +428,11 @@ curl -X GET http://localhost:7148/api/simulacoes \
 - **Armazenamento**: Persistente e distribuído
 
 **Funcionalidades (ambos os modos):**
-- Cache automático de validação de token
-- Armazenamento de refresh token com expiração
-- Cache de recomendações de produtos
-- Cache de perfil de risco
+- Cache de produtos de investimento
+- Cache de recomendações por perfil
+- Cache de consultas frequentes
 - Expiração automática baseada em TTL
+- Fallback para MemoryCache se Redis indisponível
 
 ### Chaves de Cache
 
@@ -903,15 +903,18 @@ spec:
 **1. Problemas de Banco Local (SQLite)**
 ```bash
 # Verifique se o arquivo existe
-ls -la InvestCaixa.db  # Linux/Mac
-dir InvestCaixa.db     # Windows
+ls -la src/InvestCaixa.API/InvestCaixa.db  # Linux/Mac
+dir src\InvestCaixa.API\InvestCaixa.db     # Windows
 
-# Recrie o banco se necessário
-dotnet ef database drop --project src/InvestCaixa.Infrastructure
-dotnet ef database update --project src/InvestCaixa.Infrastructure
+# Se houver problemas, simplesmente delete o arquivo:
+rm src/InvestCaixa.API/InvestCaixa.db      # Linux/Mac
+del src\InvestCaixa.API\InvestCaixa.db     # Windows
 
-# Verifique permissões do arquivo (se erro de acesso)
-chmod 666 InvestCaixa.db  # Linux/Mac
+# Reinicie a aplicação - EnsureCreated() recriará automaticamente
+# com dados de exemplo (seed)
+
+# Verifique permissões do diretório (se erro de acesso)
+chmod 755 src/InvestCaixa.API/  # Linux/Mac
 ```
 
 **2. Problemas de Conexão SQL Server (Docker)**
@@ -950,8 +953,8 @@ docker exec investcaixa-redis redis-cli ping
 - Verifique se JWT_SECRET está configurado corretamente
 - Verifique se o token não expirou
 - Valide o formato do cabeçalho Authorization: `Bearer <token>`
-- **Local**: Tokens armazenados em MemoryCache (perdidos ao reiniciar)
-- **Docker**: Tokens persistem no Redis
+- **Refresh Tokens**: Armazenados no banco de dados (SQLite/SQL Server)
+- **Validação JWT**: Feita por assinatura criptográfica (não usa cache)
 
 ## 📚 Documentação
 
@@ -1024,7 +1027,7 @@ docker exec investcaixa-redis redis-cli ping
 - [x] Camada de API (Controllers, Middlewares, Extensions)
 - [x] **Autenticação JWT com Access Tokens**
 - [x] **Suporte a Refresh Token**
-- [x] **Armazenamento de Token em Cache Redis**
+- [x] **Cache de Produtos em Redis**
 - [x] **Estratégia de Cache Distribuído**
 - [x] Logging Estruturado (Serilog)
 - [x] Tratamento Global de Exceções
@@ -1032,7 +1035,7 @@ docker exec investcaixa-redis redis-cli ping
 - [x] Testes Unitários (xUnit + Moq)
 - [x] Documentação da API (Swagger)
 - [x] Docker & Docker Compose
-- [x] Migrations de Banco de Dados
+- [x] Banco de Dados com EnsureCreated() + Seed
 - [x] Validação de Entrada (FluentValidation)
 
 ## 📄 Licença
@@ -1049,7 +1052,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.txt](
 ## 📞 Suporte
 
 Para dúvidas ou problemas:
-- 📧 Email: support@investcaixa.example.com
+- 📧 Email: lisbiel@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/lisbiel/InvesteCaixa/issues)
 - 💬 Discussões: [GitHub Discussions](https://github.com/lisbiel/InvesteCaixa/discussions)
 
