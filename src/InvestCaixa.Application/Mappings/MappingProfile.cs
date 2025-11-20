@@ -2,6 +2,7 @@ namespace InvestCaixa.Application.Mappings;
 
 using AutoMapper;
 using InvestCaixa.Application.DTOs.Response;
+using InvestCaixa.Application.Extensions;
 using InvestCaixa.Domain.Entities;
 
 public class MappingProfile : Profile
@@ -22,7 +23,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Risco, 
                 opt => opt.MapFrom(src => src.Risco.ToString()))
             .ForMember(dest => dest.PerfilRecomendado, 
-                opt => opt.MapFrom(src => src.PerfilRecomendado.ToString()));
+                opt => opt.MapFrom(src => src.PerfilRecomendado.GetDescription()));
 
         // Simulacao -> SimulacaoHistoricoResponse
         CreateMap<Simulacao, SimulacaoHistoricoResponse>()
@@ -34,6 +35,6 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Perfil, 
                 opt => opt.MapFrom(src => src.Perfil.ToString()));
 
-        // Cliente -> ClienteResponse (será criado depois)
+
     }
 }

@@ -55,7 +55,7 @@ public class TelemetriaService : ITelemetriaService
                 MediaTempoRespostaMs = t.QuantidadeChamadas > 0 ? t.TempoTotalMs / t.QuantidadeChamadas : 0,
                 MaxTempoRespostaMs = t.TempoMaximoMs,
                 MinTempoRespostaMs = t.TempoMinimoMs == long.MaxValue ? 0 : t.TempoMinimoMs,
-                TaxaSucesso = t.QuantidadeChamadas > 0 ? (decimal)t.ChamadasSucesso / t.QuantidadeChamadas * 100 : 0,
+                TaxaSucesso = t.QuantidadeChamadas > 0 ? (decimal)(t.ChamadasSucesso / t.QuantidadeChamadas) * 100 : 0,
             }).ToList();
 
         var health = CalcularHealthMetrics(servicos);

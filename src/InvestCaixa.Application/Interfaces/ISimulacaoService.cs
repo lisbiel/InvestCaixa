@@ -16,6 +16,9 @@ public interface ISimulacaoService
         DateTime? dataInicio = null,
         DateTime? dataFim = null,
         CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<ProdutoResponse>> ObterProdutosDisponiveisAsync(
+        CancellationToken cancellationToken = default);
 }
 
 public record SimulacaoPorProdutoDiaResponse

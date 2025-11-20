@@ -72,4 +72,20 @@ public class SimulacaoController : ControllerBase
 
         return Ok(resultado);
     }
+
+    /// <summary>
+    /// Lista produtos de investimento disponíveis para simulação
+    /// </summary>
+    /// <remarks>
+    /// Retorna os produtos cadastrados com seus IDs, nomes e tipos.
+    /// </remarks>
+    /// <response code="200">Lista de produtos disponíveis</response>
+    [HttpGet("produtos-disponiveis")]
+    [ProducesResponseType(typeof(IEnumerable<ProdutoResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<ProdutoResponse>>> 
+        ObterProdutosDisponiveis(CancellationToken cancellationToken)
+    {
+        var produtos = await _simulacaoService.ObterProdutosDisponiveisAsync(cancellationToken);
+        return Ok(produtos);
+    }
 }

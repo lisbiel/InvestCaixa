@@ -100,4 +100,91 @@ public class PerfilFinanceiroController : ControllerBase
 
         return isNovoPerfil ? CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfilFinanceiro.Id }) : Ok(new {message = "Perfil financeiro e de risco atualizados com sucesso", perfilFinanceiro});
     }
+
+    /// <summary>
+    /// Obter as opções de preenchimento do perfil financeiro
+    /// </summary>
+    [HttpGet("opcoes")]
+    [AllowAnonymous]
+    public ActionResult<object> ObterOpcoesPerfilFinanceiro()
+    {
+        var opcoes = new
+        {
+            Horizontes = new
+            {
+                _1 = "Curto prazo (até 1 ano e meio) - Foco em Liquidez",
+                _2 = "Médio prazo (de 1 ano e meio até 4 anos) - Foco em Crescimento",
+                _3 = "Longo prazo (acima de 4 anos) - Foco em Rentabilidade"
+            },
+            Objetivos = new
+            {
+                _1 = "Reserva de Emergência - Máxima Segurança",
+                _2 = "Aposentadoria - Crescimento Sustentável e Longo Prazo",
+                _3 = "Compra de Imóvel - Equilíbrio entre Segurança e Rentabilidade",
+                _4 = "Educação dos Filhos - Planejamento e Crescimento",
+                _5 = "Outros objetivos"
+            },
+            ToleranciaPerda = new
+            {
+                _0 = "Nenhuma (0% de perda)",
+                _1 = "Até 2% de perda",
+                _2 = "Até 5% de perda",
+                _3 = "Até 9% de perda",
+                _4 = "Até 12% de perda",
+                _5 = "Até 15% de perda",
+                _6 = "Até 18% de perda",
+                _7 = "Até 20% de perda",
+                _8 = "Até 23% de perda",
+                _9 = "Até 25% de perda",
+                _10 = "Até 30% de perda"
+            }
+        };
+        return Ok(opcoes);
+    }
+
+    /// <summary>
+    /// Obter exemplos de preenchimento do perfil financeiro
+    /// </summary>
+    [HttpGet("exemplos")]
+    [AllowAnonymous]
+    public ActionResult<object> ObterExemplosPerfilFinanceiro()
+    {
+        var exemplos = new
+        {
+            Conservador = new
+            {
+                RendaMensal = 3000,
+                PatrimonioTotal = 20000,
+                DividasAtivas = 5000,
+                DependentesFinanceiros = 2,
+                Horizonte = 1,
+                Objetivo = 1,
+                ToleranciaPerda = 0,
+                ExperienciaInvestimentos = false
+            },
+            Moderado = new
+            {
+                RendaMensal = 8000,
+                PatrimonioTotal = 150000,
+                DividasAtivas = 10000,
+                DependentesFinanceiros = 1,
+                Horizonte = 2,
+                Objetivo = 3,
+                ToleranciaPerda = 2,
+                ExperienciaInvestimentos = true
+            },
+            Agressivo = new
+            {
+                RendaMensal = 15000,
+                PatrimonioTotal = 500000,
+                DividasAtivas = 20000,
+                DependentesFinanceiros = 0,
+                Horizonte = 3,
+                Objetivo = 2,
+                ToleranciaPerda = 7,
+                ExperienciaInvestimentos = true
+            }
+        };
+        return Ok(exemplos);
+    }
 }

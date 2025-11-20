@@ -40,7 +40,25 @@ public static class ServiceCollectionExtensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "InvesteCaixa API",
+                Version = "v1.0",
+                Description = @"
+**API para simulação e gestão de investimento**
+
+Esta API permite:
+- Simular Investimentos com cálculos financeiros precisos.
+- Gerenciar perfis de risco dos clientes.
+- Consultar produtos de investimento disponíveis.
+- Calcular suitability (CVM 539)",
+                Contact = new OpenApiContact
+                {
+                    Name = "Gabriel Lisboa Espindola Florencio",
+                    Email = "gabriel.florencio@caixa.gov.br",
+                    Url = new Uri("https://github.com/lisbiel/InvestCaixa")
+                }
+            });
 
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
@@ -49,7 +67,17 @@ public static class ServiceCollectionExtensions
                 Scheme = "bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Informe o token JWT com Bearer"
+                Description = @"
+                **Autenticação JWT**
+                Informe o token JWT, insira apenas o token, sem o 'Bearer '.
+
+                **Para obter o token:**
+                1. Use o endpoint '/api/auth/login'
+                2. Copie o token da resposta
+                3. Cole aqui para autorizar os requests.
+
+
+                Refresh Tokens implementados, caso seu token expire."
             });
 
             options.AddSecurityRequirement(doc =>

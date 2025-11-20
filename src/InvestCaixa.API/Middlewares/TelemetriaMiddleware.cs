@@ -55,7 +55,12 @@ public class TelemetriaMiddleware
             if (!path.Contains("/swagger") && !path.Contains("/health"))
             {
                 var nomeServico = ExtrairNomeServico(path);
-                telemetriaService.RegistrarChamada(nomeServico, stopwatch.ElapsedMilliseconds);
+                telemetriaService.RegistrarChamadaAvancada(
+                    nomeServico,
+                    stopwatch.ElapsedMilliseconds,
+                    sucesso,
+                    tipoErro,
+                    contexto);
 
                 _logger.LogInformation(
                     "Request {Method} {Path} completado em {Duration}ms com status {StatusCode}",

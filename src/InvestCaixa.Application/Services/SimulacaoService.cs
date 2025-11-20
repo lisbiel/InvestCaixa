@@ -153,4 +153,12 @@ public class SimulacaoService : ISimulacaoService
             _ => AdequacaoPerfil.NaoAvaliado
         };
     }
+
+    public Task<IEnumerable<ProdutoResponse>> ObterProdutosDisponiveisAsync(CancellationToken cancellationToken = default)
+    {
+        var produtos = _unitOfWork.ProdutoRepository
+            .GetAllAsync(cancellationToken);
+
+        return produtos.ContinueWith(t => _mapper.Map<IEnumerable<ProdutoResponse>>(t.Result), cancellationToken);
+    }
 }
