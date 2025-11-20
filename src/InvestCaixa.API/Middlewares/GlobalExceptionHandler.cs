@@ -9,9 +9,10 @@ public class GlobalExceptionHandler : IExceptionHandler
     private readonly ILogger<GlobalExceptionHandler> _logger;
     private readonly IWebHostEnvironment _environment;
 
-    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
+    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger, IWebHostEnvironment environment)
     {
         _logger = logger;
+        _environment = environment;
     }
 
     public async ValueTask<bool> TryHandleAsync(
@@ -58,7 +59,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
 
-        if(_environment.IsDevelopment())
+        if(_environment?.IsDevelopment() != null)
         {
             problemDetails.Extensions["stackTrace"] = exception.StackTrace;
             problemDetails.Extensions["innerException"] = exception.InnerException?.Message;
