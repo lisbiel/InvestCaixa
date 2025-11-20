@@ -79,8 +79,6 @@ public class ObterPerfilRiscoQueryHandler : IRequestHandler<ObterPerfilRiscoQuer
         var simulacoes = await _unitOfWork.SimulacaoRepository
             .ObterPorClienteAsync(clienteId, cancellationToken);
 
-        PerfilInvestidor perfil;
-
         var volumeTotal = simulacoes.Sum(s => s.ValorInvestido);
         var frequencia = simulacoes.Count();
         var prefereLiquidez = simulacoes

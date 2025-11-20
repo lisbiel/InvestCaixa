@@ -1,5 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace InvestCaixa.Application.Common;
 
+//Genérico, sem lógica
+[ExcludeFromCodeCoverage]
 public record Result<T>
 {
     public bool Success { get; init; }

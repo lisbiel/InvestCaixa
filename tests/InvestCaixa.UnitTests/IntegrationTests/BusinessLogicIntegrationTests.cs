@@ -12,7 +12,7 @@ using System.Text.Json;
 using Xunit;
 
 [Collection("Integration Tests")]
-public class BusinessLogicIntegrationTests
+public class BusinessLogicIntegrationTests : IAsyncLifetime
 {
     private readonly IntegrationTestFixture _fixture;
     private readonly JsonSerializerOptions _jsonOptions = new() { PropertyNameCaseInsensitive = true };
@@ -20,8 +20,14 @@ public class BusinessLogicIntegrationTests
     public BusinessLogicIntegrationTests(IntegrationTestFixture fixture)
     {
         _fixture = fixture;
-        _fixture.ResetDatabase();
     }
+
+    public async Task InitializeAsync()
+    {
+        await _fixture.ResetDatabase();
+    }
+
+    public Task DisposeAsync() => Task.CompletedTask;
 
     [Theory]
     [InlineData("CDB", 0.12)]

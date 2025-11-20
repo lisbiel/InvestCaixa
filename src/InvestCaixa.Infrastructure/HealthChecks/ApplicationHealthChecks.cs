@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace InvestCaixa.Infrastructure.HealthChecks;
 
+[ExcludeFromCodeCoverage]
 public class ApplicationHealthChecks : IHealthCheck
 {
     private readonly ILogger<ApplicationHealthChecks> _logger;

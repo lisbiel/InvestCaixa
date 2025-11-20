@@ -84,38 +84,41 @@ public class PerfilRisco : BaseEntity
                 ? VolumeInvestimentos / dadosFinanceiros.PatrimonioTotal
                 : 0;
 
-            pontos += percentualInvestido switch
+            // Ajuste: reduzir o peso do percentual investido para evitar que clientes com
+            // patrimônio declarado baixo sejam promovidos com facilidade a perfil mais alto.
+            var percentualPoints = percentualInvestido switch
             {
-                >= 0.5m => 15,
-                >= 0.3m => 10,
-                >= 0.25m => 9,
-                >= 0.1m => 5,
-                _ => 2
+                >= 0.5m => 10,
+                >= 0.3m => 7,
+                >= 0.25m => 6,
+                >= 0.1m => 3,
+                _ => 1
             };
+            pontos += percentualPoints;
 
-            // Tolerância a risco (0-15 pontos)
-            pontos += (dadosFinanceiros.ToleranciaPerda *15)/10;
+            // Tolerância a risco (0-20 pontos) - aumentado de 15
+            pontos += (dadosFinanceiros.ToleranciaPerda * 20) / 10;
 
-            // Horizonte de investimento (0-10 pontos)
+            // Horizonte de investimento (0-15 pontos) - aumentado de 10
             pontos += dadosFinanceiros.Horizonte switch
             {
-                HorizonteInvestimento.CurtoPrazo => 3,
-                HorizonteInvestimento.MedioPrazo => 7,
-                HorizonteInvestimento.LongoPrazo => 10,
+                HorizonteInvestimento.CurtoPrazo => 5,
+                HorizonteInvestimento.MedioPrazo => 10,
+                HorizonteInvestimento.LongoPrazo => 15,
                 _ => 5
             };
 
-            pontos *= dadosFinanceiros.ExperienciaInvestimentos ? 10 : 0;
+            pontos += dadosFinanceiros.ExperienciaInvestimentos ? 10 : 0;
         }
 
         Pontuacao = pontos;
 
-        if (pontos <= 35)
+        if (pontos <= 38)
         {
             Perfil = PerfilInvestidor.Conservador;
             Descricao = "Perfil conservador: prioriza segurança e liquidez, baixa tolerância a risco";
         }
-        else if (pontos <= 65)
+        else if (pontos <= 47)
         {
             Perfil = PerfilInvestidor.Moderado;
             Descricao = "Perfil moderado: busca equilíbrio entre segurança e rentabilidade";

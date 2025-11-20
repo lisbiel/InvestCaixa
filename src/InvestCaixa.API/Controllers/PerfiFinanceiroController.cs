@@ -5,6 +5,7 @@ using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace InvestCaixa.API.Controllers;
 
@@ -78,7 +79,12 @@ public class PerfilFinanceiroController : ControllerBase
 
         await _perfilRiscoService.AtualizarPerfilAsync(clienteId,cancellationToken);
 
-        return isNovoPerfil ? CreatedAtAction(nameof(CriarPerfilFinanceiro), new { id = perfilFinanceiro.Id }) : Ok(new {message = "Perfil financeiro e de risco atualizados com sucesso", perfilFinanceiro});
+        // Re-obtain the updated risk profile to return the recalculated values in the response.
+        var perfilRiscoAtualizado = await _perfilRiscoService.ObterPerfilRiscoAsync(clienteId, cancellationToken);
+
+        var response = new { message = "Perfil financeiro e de risco atualizados com sucesso", perfilFinanceiro, perfilRisco = perfilRiscoAtualizado };
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -86,6 +92,7 @@ public class PerfilFinanceiroController : ControllerBase
     /// </summary>
     [HttpGet("opcoes")]
     [AllowAnonymous]
+    [ExcludeFromCodeCoverage] // Sem motivo para testar método puramente de resposta estática
     public ActionResult<object> ObterOpcoesPerfilFinanceiro()
     {
         var opcoes = new
@@ -127,6 +134,7 @@ public class PerfilFinanceiroController : ControllerBase
     /// </summary>
     [HttpGet("exemplos")]
     [AllowAnonymous]
+    [ExcludeFromCodeCoverage] // Sem motivo para testar método puramente de resposta estática
     public ActionResult<object> ObterExemplosPerfilFinanceiro()
     {
         var exemplos = new

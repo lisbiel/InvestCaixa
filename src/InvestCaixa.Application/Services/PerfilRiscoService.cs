@@ -101,17 +101,23 @@ public class PerfilRiscoService : IPerfilRiscoService
 
             if (perfilExistente != null)
             {
+                // Fetch the current PerfilFinanceiro to allow advanced scoring (uses financial data)
+                var perfilFinanceiro = await _unitOfWork.PerfilFinanceiroRepository
+                    .ObterPorClienteAsync(clientId, cancellationToken);
+
                 perfilExistente.AtualizarDados(
                     perfilAtualizado.VolumeInvestimentos,
                     perfilAtualizado.FrequenciaMovimentacoes,
-                    perfilAtualizado.PrefereLiquidez);
+                    perfilAtualizado.PrefereLiquidez,
+                    perfilFinanceiro);
 
-                _logger.LogInformation("Perfil atualizado para cliente {ClienteId} - Perfil: {PerfilAntigo} -> {PerfilNovo}, Pontuacao - {PontuacaoAntiga} -> {PontuacaoNova}"
-                    , clientId,
+                _logger.LogInformation("Perfil atualizado para cliente {ClienteId} - Perfil: {PerfilAntigo} -> {PerfilNovo}, Pontuacao - {PontuacaoAntiga} -> {PontuacaoNova}",
+                    clientId,
                     perfilExistente.Perfil,
                     perfilAtualizado.Perfil,
                     perfilExistente.Pontuacao,
                     perfilAtualizado.Pontuacao);
+
                 await _unitOfWork.ClienteRepository
                     .AtualizarPerfilRiscoAsync(perfilExistente);
             }

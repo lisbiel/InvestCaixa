@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   # Redis para cache distribuído
   redis:
@@ -16,7 +14,27 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-
+  
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: investcaixa-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: $SA_PASSWORD
+      MSSQL_PID: "Express"
+    ports:
+      - "1431:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+      - /scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      # sqlcmd is not included in the base SQL Server image; use a TCP port check instead
+      test: ["CMD-SHELL", "bash -c 'cat </dev/tcp/127.0.0.1/1433 >/dev/null 2>&1 || exit 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
   # API .NET 9
   api:
     build:
@@ -28,14 +46,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
-      - ConnectionStrings__DefaultConnection=Data Source=/app/data/invest.db
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=InvestCaixaDB;User Id=sa;Password=C@ix4V3rs0!;MultipleActiveResultSets=true;TrustServerCertificate=True
       - ConnectionStrings__Redis=redis:6379,abortConnect=false
       - Jwt__Issuer=InvestCaixa
       - Jwt__Audience=InvestCaixa
       - Jwt__Secret=${JWT_SECRET:-ChaveSecretaSuperSeguraParaProducao123!@#}
+      - Jwt__ExpirationMinutes=60
     depends_on:
       redis:
         condition: service_healthy
+      sqlserver:
+        condition: service_started
     volumes:
       - ./data:/app/data
     restart: unless-stopped
@@ -49,3 +71,7 @@ services:
 volumes:
   redis-data:
     driver: local
+    name: investcaixa-redis-data
+  sqlserver-data:
+    driver: local
+    name: investcaixa-sqlserver-data

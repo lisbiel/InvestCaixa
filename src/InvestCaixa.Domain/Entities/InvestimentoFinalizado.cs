@@ -31,6 +31,20 @@ public class InvestimentoFinalizado : BaseEntity
             Id, ClienteId, ProdutoId, ValorAplicado, DataAplicacao));
     }
 
+    public InvestimentoFinalizado(int clienteId, Guid produtoId, decimal valorAplicado, DateTime dataAplicacao, int prazoMeses
+        , DateTime dataResgate, StatusInvestimento status, decimal valorResgatado)
+    {
+        if (valorAplicado <= 0) throw new DomainException("Valor aplicado deve ser positivo");
+        ClienteId = clienteId;
+        ProdutoId = produtoId;
+        ValorAplicado = valorAplicado;
+        DataAplicacao = dataAplicacao;
+        DataResgate = dataResgate;
+        ValorResgatado = valorResgatado;
+        Status = status;
+        PrazoMeses = prazoMeses;
+    }
+
     public InvestimentoFinalizado(int clienteId, Guid produtoId, decimal valorAplicado, DateTime dataAplicacao, int prazoMeses)
     {
         if (valorAplicado <= 0) throw new DomainException("Valor aplicado deve ser positivo");

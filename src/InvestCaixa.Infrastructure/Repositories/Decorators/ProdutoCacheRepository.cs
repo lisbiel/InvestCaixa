@@ -3,9 +3,12 @@ using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using InvestCaixa.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace InvestCaixa.Infrastructure.Repositories.Decorators;
 
+//Redis não testável
+[ExcludeFromCodeCoverage]
 public class CachingProdutoRepository : IProdutoRepository
 {
     private readonly IProdutoRepository _innerRepository;

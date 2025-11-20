@@ -29,7 +29,7 @@ public class CriarPerfilFinanceiroRequest
     /// Tolerância à Perda de 1 a 10 (Use /opcoes para ver valores recomendados)
     /// </summary>
     /// <example>7</example>
-    [Range(1, 10, ErrorMessage = "Valor deve estar entre 0 e 10")]
+    [Range(0, 10, ErrorMessage = "Valor deve estar entre 0 e 10")]
     public int ToleranciaPerda { get; set; }
     public bool ExperienciaInvestimentos { get; set; }
 }

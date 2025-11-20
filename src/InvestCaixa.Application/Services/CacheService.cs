@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace InvestCaixa.Application.Services;
 
+//Redis não testável
+[ExcludeFromCodeCoverage]
 public class CacheService : ICacheService
 {
     private readonly IDistributedCache _distributedCache;

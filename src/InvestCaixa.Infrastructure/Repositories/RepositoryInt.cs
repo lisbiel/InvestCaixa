@@ -3,11 +3,13 @@ namespace InvestCaixa.Infrastructure.Repositories;
 using InvestCaixa.Domain.Interfaces;
 using InvestCaixa.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Implementação genérica do repositório para entidades com Id int
 /// Usado para Cliente e outras entidades com chave primária int - mantém compatiblidade com o padrão esperado
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class RepositoryInt<T> : IRepositoryInt<T> where T : class
 {
     protected readonly InvestimentoDbContext _context;

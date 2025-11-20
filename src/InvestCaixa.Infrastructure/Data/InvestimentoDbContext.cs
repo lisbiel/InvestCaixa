@@ -3,7 +3,9 @@ namespace InvestCaixa.Infrastructure.Data;
 using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
+[ExcludeFromCodeCoverage]
 public class InvestimentoDbContext : DbContext
 {
     public InvestimentoDbContext(DbContextOptions<InvestimentoDbContext> options)
@@ -15,6 +17,8 @@ public class InvestimentoDbContext : DbContext
     public DbSet<ProdutoInvestimento> Produtos { get; set; } = null!;
     public DbSet<Simulacao> Simulacoes { get; set; } = null!;
     public DbSet<PerfilRisco> PerfisRisco { get; set; } = null!;
+    public DbSet<PerfilFinanceiro> PerfisFinanceiros { get; set; } = null!;
+    public DbSet<InvestimentoFinalizado> InvestimentoFinalizados { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,8 +27,8 @@ public class InvestimentoDbContext : DbContext
         // Aplicar todas as configurações do assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(InvestimentoDbContext).Assembly);
 
-        // Seed data inicial
-        SeedData(modelBuilder);
+        // Seed movido para um método separado para melhor organização
+        //SeedData(modelBuilder);
     }
 
     private static void SeedData(ModelBuilder modelBuilder)

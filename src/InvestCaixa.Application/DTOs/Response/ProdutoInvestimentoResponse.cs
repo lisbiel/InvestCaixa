@@ -1,5 +1,9 @@
-﻿namespace InvestCaixa.Application.DTOs.Response;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace InvestCaixa.Application.DTOs.Response;
+
+//Sem lógica, apenas DTO
+[ExcludeFromCodeCoverage]
 public class ProdutoInvestimentoResponse    
 {
     /// <summary>

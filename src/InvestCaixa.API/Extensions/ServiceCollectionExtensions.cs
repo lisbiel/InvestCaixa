@@ -51,7 +51,14 @@ Esta API permite:
 - Simular Investimentos com cálculos financeiros precisos.
 - Gerenciar perfis de risco dos clientes.
 - Consultar produtos de investimento disponíveis.
-- Calcular suitability (CVM 539)",
+- Calcular suitability (CVM 539)
+- Perfil de risco automatizado
+- Segurança JWT com refres tokens
+
+Para testes rápidos:
+1. Use 'api/perfil-financeiro/opcoes' para ver valores válidos
+2. Use 'api/perfil-financeiro/exemplos' para ver exemplos prontos de perfis
+3. Use 'api/simulacao/produtos-disponveis' ",
                 Contact = new OpenApiContact
                 {
                     Name = "Gabriel Lisboa Espindola Florencio",
@@ -96,7 +103,7 @@ Esta API permite:
         });
 
             // JWT Authentication
-            var jwtSettings = configuration.GetSection("Jwt");
+        var jwtSettings = configuration.GetSection("Jwt");
         var secretKey = jwtSettings["Secret"] ?? throw new InvalidOperationException("JWT Secret não configurado");
 
         services.AddAuthentication(options =>
@@ -166,11 +173,34 @@ Esta API permite:
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var dbConnection = configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection não configurada.");
         // Database Context
         services.AddDbContext<InvestimentoDbContext>(options =>
-            options.UseSqlite(
-                configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(InvestimentoDbContext).Assembly.FullName)));
+        {
+            if(dbConnection.StartsWith("Data Source="))
+            {
+                options.UseSqlite(dbConnection, sqliteOptionsAction =>
+                {
+                        sqliteOptionsAction.MigrationsAssembly(typeof(InvestimentoDbContext).Assembly.FullName);
+                });
+            }
+            else
+            {
+                options.UseSqlServer(dbConnection, sqlServerOptionsAction =>
+                {
+                    sqlServerOptionsAction.MigrationsAssembly(typeof(InvestimentoDbContext).Assembly.FullName); 
+                    sqlServerOptionsAction.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null);
+                });
+            }
+
+            options.EnableSensitiveDataLogging(false);
+            options.EnableServiceProviderCaching();
+            options.EnableDetailedErrors(configuration.GetValue<bool>("DetailedErros", false));
+        });
 
         services.AddScoped<ISimulacaoRepository, SimulacaoRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -192,12 +222,30 @@ Esta API permite:
 
         var redisConnection = configuration.GetConnectionString("Redis")
             ?? throw new InvalidOperationException("ConnectionStrings:Redis não configurada.");
-
-        services.AddStackExchangeRedisCache(options =>
+        if( !string.IsNullOrEmpty(redisConnection))
         {
-            options.Configuration = redisConnection;
-            options.InstanceName = "InvestCaixa_";
-        });
+            try
+            {
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = redisConnection;
+                    options.InstanceName = "InvestCaixa_";
+                    options.ConfigurationOptions = new ConfigurationOptions
+                    {
+                        ConnectTimeout = 5000,
+                        SyncTimeout = 5000,
+                        AbortOnConnectFail = false,
+                        ConnectRetry = 3
+                    };
+                });
+            }
+            catch (Exception ex)
+            {
+                var logger = services.BuildServiceProvider().GetRequiredService<ILoggerFactory>().CreateLogger("RedisSetup");
+                logger?.LogWarning(ex, "Falha ao configurar o Redis Cache. Continuando sem cache distribuído.");
+            }
+        }
+        
 
         services.AddHealthChecks()
             .AddDbContextCheck<InvestimentoDbContext>("Database", tags: new[] { "db", "ready" })

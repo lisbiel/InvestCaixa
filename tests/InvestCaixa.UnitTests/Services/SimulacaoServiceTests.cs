@@ -61,9 +61,15 @@ public class SimulacaoServiceTests
             1,
             true);
 
+        var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
+
         _unitOfWorkMock
             .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(produto);
+
+        _unitOfWorkMock
+            .Setup(x => x.ClienteRepository.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(cliente);
 
         _unitOfWorkMock
             .Setup(x => x.SimulacaoRepository.AddAsync(It.IsAny<Simulacao>(), It.IsAny<CancellationToken>()))
@@ -118,6 +124,12 @@ public class SimulacaoServiceTests
             .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync((ProdutoInvestimento?)null);
 
+        var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
+
+        _unitOfWorkMock
+            .Setup(x => x.ClienteRepository.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(cliente);
+
         // Act & Assert
         await Assert.ThrowsAsync<NotFoundException>(
             () => _service.SimularInvestimentoAsync(request));
@@ -149,9 +161,15 @@ public class SimulacaoServiceTests
             true,
             PerfilInvestidor.Conservador);
 
+        var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
+
         _unitOfWorkMock
             .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(produto);
+
+        _unitOfWorkMock
+            .Setup(x => x.ClienteRepository.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(cliente);
 
         // Act & Assert
         await Assert.ThrowsAsync<ValidationException>(

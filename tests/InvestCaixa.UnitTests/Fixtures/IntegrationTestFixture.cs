@@ -92,7 +92,17 @@ public class IntegrationTestFixture : IAsyncLifetime
         var clientes = new List<Cliente>
         {
             new ("João Silva", "joao@test.com", "12345678901", DateTime.Now.AddYears(-40)),
-            new ("João Sousa", "joaos@test.com", "10987654321", DateTime.Now.AddYears(-20))
+            new ("João Sousa", "joaos@test.com", "10987654321", DateTime.Now.AddYears(-20)),
+            new ("Maria Santos", "maria@test.com", "11111111111", DateTime.Now.AddYears(-35)),
+            new ("Pedro Costa", "pedro@test.com", "22222222222", DateTime.Now.AddYears(-45)),
+            new ("Ana Oliveira", "ana@test.com", "33333333333", DateTime.Now.AddYears(-30)),
+            new ("Carlos Mendes", "carlos@test.com", "44444444444", DateTime.Now.AddYears(-50)),
+            new ("Lucia Ferreira", "lucia@test.com", "55555555555", DateTime.Now.AddYears(-28)),
+            new ("Roberto Silva", "roberto@test.com", "66666666666", DateTime.Now.AddYears(-55)),
+            new ("Patricia Gomes", "patricia@test.com", "77777777777", DateTime.Now.AddYears(-32)),
+            new ("Bruno Alves", "bruno@test.com", "88888888888", DateTime.Now.AddYears(-42)),
+            new ("Amanda Rocha", "amanda@test.com", "99999999999", DateTime.Now.AddYears(-25)),
+            new ("Felipe Costa", "felipe@test.com", "10101010101", DateTime.Now.AddYears(-38))
         };
         dbContext.Clientes.AddRange(clientes);
 
@@ -106,9 +116,19 @@ public class IntegrationTestFixture : IAsyncLifetime
 
         dbContext.Simulacoes.RemoveRange(dbContext.Simulacoes);
         dbContext.PerfisRisco.RemoveRange(dbContext.PerfisRisco);
+        dbContext.PerfisFinanceiros.RemoveRange(dbContext.PerfisFinanceiros);
+        dbContext.InvestimentoFinalizados.RemoveRange(dbContext.InvestimentoFinalizados);
 
-        
         var cache = scope.ServiceProvider.GetRequiredService<ICacheService>();
+
+        await dbContext.SaveChangesAsync();
+
+        // Re-seed the perfis financeiros after reset (for BusinessLogicIntegrationTests)
+        var perfilsFinanceiros = new List<PerfilFinanceiro>
+        {
+            new(1, 2500, 18000, 6000, 2, HorizonteInvestimento.CurtoPrazo, ObjetivoInvestimento.ReservaEmergencia, 0, false)
+        };
+        dbContext.PerfisFinanceiros.AddRange(perfilsFinanceiros);
 
         await dbContext.SaveChangesAsync();
     }

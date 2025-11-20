@@ -32,8 +32,8 @@ RUN dotnet publish "InvestCaixa.API.csproj" -c Release -o /app/publish /p:UseApp
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-EXPOSE 80
 EXPOSE 8080
+EXPOSE 8081
 
 # Usuário não-root para segurança
 RUN addgroup --system --gid 1000 dotnet && \

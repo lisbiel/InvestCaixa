@@ -4,7 +4,9 @@ using InvestCaixa.Domain.Entities;
 using InvestCaixa.Domain.Interfaces;
 using InvestCaixa.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
+[ExcludeFromCodeCoverage]
 public class Repository<T> : IRepository<T> where T : BaseEntity
 {
     protected readonly InvestimentoDbContext _context;

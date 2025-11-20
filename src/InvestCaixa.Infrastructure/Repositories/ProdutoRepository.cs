@@ -19,11 +19,12 @@ public class ProdutoRepository : Repository<ProdutoInvestimento>, IProdutoReposi
         if (!Enum.TryParse<TipoProduto>(tipo, true, out var tipoProduto))
             return null;
 
-        return await _dbSet
+        return _dbSet
             .Where(p => p.Tipo == tipoProduto)
             .AsNoTracking()
-            .OrderByDescending(p => p.Rentabilidade)
-            .FirstOrDefaultAsync(cancellationToken);
+            .ToList()
+            .OrderBy(p => p.Rentabilidade)
+            .FirstOrDefault();
     }
 
     public async Task<IEnumerable<ProdutoInvestimento>> ObterPorPerfilAsync(
