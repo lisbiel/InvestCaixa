@@ -60,4 +60,30 @@ public class ProdutoRepository : Repository<ProdutoInvestimento>, IProdutoReposi
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<IEnumerable<ProdutoInvestimento>> ObterPorTipoEPerfilAsync(
+        string tipo,
+        PerfilInvestidor? perfil = null,
+        CancellationToken cancellationToken = default)
+    {
+        if (!Enum.TryParse<TipoProduto>(tipo, true, out var tipoProduto))
+            return Enumerable.Empty<ProdutoInvestimento>();
+
+        var query = _dbSet.Where(p => p.Tipo == tipoProduto);
+
+        // Se perfil foi especificado, priorizar produtos recomendados para esse perfil
+        if (perfil.HasValue)
+        {
+            query = query.OrderBy(p => p.PerfilRecomendado == perfil.Value ? 0 : 1)
+                         .ThenBy(p => Math.Abs((int)p.PerfilRecomendado - (int)perfil.Value))
+                         .ThenByDescending(p => p.Rentabilidade);
+        }
+        else
+        {
+            // Sem perfil, ordenar apenas por rentabilidade
+            query = query.OrderBy(p => p.Rentabilidade);
+        }
+
+        return await query.AsNoTracking().ToListAsync(cancellationToken);
+    }
 }

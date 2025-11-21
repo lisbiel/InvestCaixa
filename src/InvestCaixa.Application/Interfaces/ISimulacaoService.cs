@@ -19,6 +19,11 @@ public interface ISimulacaoService
 
     Task<IEnumerable<ProdutoResponse>> ObterProdutosDisponiveisAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<ProdutoResponse>> ObterProdutosRecomendadosPorTipoAsync(
+        int clienteId,
+        string tipo,
+        CancellationToken cancellationToken = default);
 }
 
 public record SimulacaoPorProdutoDiaResponse

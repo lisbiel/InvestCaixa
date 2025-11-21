@@ -167,7 +167,7 @@ public class PerfilRiscoService : IPerfilRiscoService
         var perfil = new PerfilRisco(
             clienteId,
             volumeTotal,
-            frequenciaRecente,
+            investimentoFinalizadoRecente,
             prefereLiquidez,
             perfilFinanceiro);
 

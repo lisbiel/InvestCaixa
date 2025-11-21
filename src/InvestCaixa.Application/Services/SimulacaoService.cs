@@ -36,14 +36,21 @@ public class SimulacaoService : ISimulacaoService
         _logger.LogInformation("Iniciando simulação para cliente {ClienteId} com valor {Valor}", 
             request.ClienteId, request.Valor);
 
-        var produto = await _unitOfWork.ProdutoRepository
-            .ObterPorTipoAsync(request.TipoProduto, cancellationToken);
-
         var client = await _unitOfWork.ClienteRepository
             .GetByIdAsync(request.ClienteId, cancellationToken);
 
         if (client == null)
             throw new NotFoundException($"Cliente com ID {request.ClienteId} não encontrado");
+
+        // Obter perfil de risco do cliente para recomendação inteligente
+        var perfilRisco = await _unitOfWork.ClienteRepository
+            .ObterPerfilRiscoAsync(request.ClienteId, cancellationToken);
+
+        // Buscar produtos considerando perfil de risco (se disponível)
+        var produtosDisponiveis = await _unitOfWork.ProdutoRepository
+            .ObterPorTipoEPerfilAsync(request.TipoProduto, perfilRisco?.Perfil, cancellationToken);
+
+        var produto = produtosDisponiveis.FirstOrDefault();
 
         if (produto == null)
             throw new NotFoundException($"Produto do tipo {request.TipoProduto} não encontrado");
@@ -73,9 +80,15 @@ public class SimulacaoService : ISimulacaoService
         await _unitOfWork.SimulacaoRepository.AddAsync(simulacao, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
+        // Log detalhado da recomendação inteligente
+        var perfilDescricao = perfilRisco?.Perfil.ToString() ?? "Não definido";
+        var recomendacaoMsg = perfilRisco != null 
+            ? $"Produto recomendado baseado no perfil {perfilDescricao}"
+            : "Produto selecionado sem análise de perfil (perfil não encontrado)";
+            
         _logger.LogInformation(
-            "Simulação concluída. Valor inicial: {ValorInicial}, Valor final: {ValorFinal}",
-            request.Valor, valorFinal);
+            "Simulação concluída. Cliente: {ClienteId}, Perfil: {Perfil}, Produto: {Produto}, Valor inicial: {ValorInicial}, Valor final: {ValorFinal}. {RecomendacaoMsg}",
+            request.ClienteId, perfilDescricao, produto.Nome, request.Valor, valorFinal, recomendacaoMsg);
 
         return new SimulacaoResponse
         {
@@ -166,5 +179,37 @@ public class SimulacaoService : ISimulacaoService
             .GetAllAsync(cancellationToken);
 
         return produtos.ContinueWith(t => _mapper.Map<IEnumerable<ProdutoResponse>>(t.Result), cancellationToken);
+    }
+
+    public async Task<IEnumerable<ProdutoResponse>> ObterProdutosRecomendadosPorTipoAsync(
+        int clienteId,
+        string tipo,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Obtendo produtos recomendados do tipo {Tipo} para cliente {ClienteId}", 
+            tipo, clienteId);
+
+        // Verificar se cliente existe
+        var cliente = await _unitOfWork.ClienteRepository.GetByIdAsync(clienteId, cancellationToken);
+        if (cliente == null)
+            throw new NotFoundException($"Cliente com ID {clienteId} não encontrado");
+
+        // Obter perfil de risco do cliente
+        var perfilRisco = await _unitOfWork.ClienteRepository
+            .ObterPerfilRiscoAsync(clienteId, cancellationToken);
+
+        // Buscar produtos recomendados do tipo especificado
+        var produtos = await _unitOfWork.ProdutoRepository
+            .ObterPorTipoEPerfilAsync(tipo, perfilRisco?.Perfil, cancellationToken);
+
+        var produtoResponses = _mapper.Map<IEnumerable<ProdutoResponse>>(produtos);
+
+        // Log da recomendação
+        var perfilDescricao = perfilRisco?.Perfil.ToString() ?? "Não definido";
+        _logger.LogInformation(
+            "Encontrados {Quantidade} produtos do tipo {Tipo} para cliente {ClienteId} (perfil: {Perfil})", 
+            produtos.Count(), tipo, clienteId, perfilDescricao);
+
+        return produtoResponses;
     }
 }

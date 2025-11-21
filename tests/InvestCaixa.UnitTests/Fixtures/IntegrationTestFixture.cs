@@ -33,31 +33,7 @@ public class IntegrationTestFixture : IAsyncLifetime
 
     private string GerarTokenValido()
     {
-        using var scope = _factory.Services.CreateScope();
-        var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-
-        var jwtSection = config.GetSection("Jwt");
-        var secretKey = jwtSection["Secret"]!;
-        var issuer = jwtSection["Issuer"]!;
-        var audience = jwtSection["Audience"]!;
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, "admin"),
-            new Claim("name", "admin")
-        };
-
-        var token = new JwtSecurityToken(
-            issuer: issuer,
-            audience: audience,
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(1),
-            signingCredentials: creds);
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return Helpers.JwtTestHelper.GenerateTestToken(1, "admin@test.com", 60);
     }
 
     public async Task InitializeAsync()

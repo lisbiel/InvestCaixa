@@ -388,7 +388,7 @@ public class PerfilRiscoTests
     public void Descricao_Moderado_DeveSerConsistente()
     {
         // Arrange
-        var perfil = new PerfilRisco(1, 100000, 5, false);
+        var perfil = new PerfilRisco(1, 100000, 10, false);
 
         // Act & Assert
         perfil.Descricao.Should().Contain("moderado");

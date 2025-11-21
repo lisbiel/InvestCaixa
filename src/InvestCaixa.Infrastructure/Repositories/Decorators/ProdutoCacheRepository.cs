@@ -133,6 +133,31 @@ public class CachingProdutoRepository : IProdutoRepository
         return produtos;
     }
 
+    public async Task<IEnumerable<ProdutoInvestimento>> ObterPorTipoEPerfilAsync(
+        string tipo,
+        PerfilInvestidor? perfil = null,
+        CancellationToken cancellationToken = default)
+    {
+        var cacheKey = BuildCacheKeyForTipoEPerfil(tipo, perfil);
+
+        var cached = await _cache.GetAsync<List<ProdutoInvestimento>>(cacheKey);
+        if (cached != null)
+        {
+            _logger.LogDebug("Cache hit para produtos tipo {Tipo} perfil {Perfil}", tipo, perfil);
+            return cached;
+        }
+
+        _logger.LogDebug("Cache miss para produtos tipo {Tipo} perfil {Perfil}", tipo, perfil);
+        var produtos = (await _innerRepository.ObterPorTipoEPerfilAsync(tipo, perfil, cancellationToken)).ToList();
+
+        if (produtos.Any())
+        {
+            await _cache.SetAsync(cacheKey, produtos);
+        }
+
+        return produtos;
+    }
+
     public async Task<IEnumerable<ProdutoInvestimento>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         var cacheKey = BuildCacheKeyForTodos();
@@ -253,6 +278,9 @@ public class CachingProdutoRepository : IProdutoRepository
 
     private static string BuildCacheKeyForPerfil(PerfilInvestidor perfil)
         => $"produtos:perfil:{perfil}";
+
+    private static string BuildCacheKeyForTipoEPerfil(string tipo, PerfilInvestidor? perfil) => 
+        $"produtos:tipo:{tipo.ToLower()}:perfil:{perfil?.ToString() ?? "null"}";
 
     private static string BuildCacheKeyForCriterios(decimal? valorMinimo, NivelRisco? nivelRisco, bool? permiteLiquidez)
     {

@@ -88,4 +88,34 @@ public class SimulacaoController : ControllerBase
         var produtos = await _simulacaoService.ObterProdutosDisponiveisAsync(cancellationToken);
         return Ok(produtos);
     }
+
+    /// <summary>
+    /// Obtém produtos recomendados por tipo considerando o perfil do cliente
+    /// </summary>
+    /// <param name="clienteId">ID do cliente</param>
+    /// <param name="tipo">Tipo do produto (CDB, LCI, LCA, Fundo, etc.)</param>
+    /// <param name="cancellationToken">Token de cancelamento</param>
+    /// <remarks>
+    /// Retorna produtos do tipo especificado ordenados por compatibilidade com o perfil de risco do cliente.
+    /// Se o cliente não tiver perfil definido, retorna produtos ordenados por rentabilidade.
+    /// </remarks>
+    /// <response code="200">Lista de produtos recomendados para o cliente</response>
+    /// <response code="404">Cliente não encontrado</response>
+    [HttpGet("produtos-recomendados/{clienteId}/{tipo}")]
+    [ProducesResponseType(typeof(IEnumerable<ProdutoResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<ProdutoResponse>>> 
+        ObterProdutosRecomendadosPorTipo(
+            int clienteId, 
+            string tipo,
+            CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Obtendo produtos recomendados do tipo {Tipo} para cliente {ClienteId}", 
+            tipo, clienteId);
+
+        var produtos = await _simulacaoService.ObterProdutosRecomendadosPorTipoAsync(
+            clienteId, tipo, cancellationToken);
+
+        return Ok(produtos);
+    }
 }

@@ -64,8 +64,8 @@ public class SimulacaoServiceTests
         var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
 
         _unitOfWorkMock
-            .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(produto);
+            .Setup(x => x.ProdutoRepository.ObterPorTipoEPerfilAsync(It.IsAny<string>(), It.IsAny<PerfilInvestidor?>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<ProdutoInvestimento> { produto });
 
         _unitOfWorkMock
             .Setup(x => x.ClienteRepository.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
@@ -121,8 +121,8 @@ public class SimulacaoServiceTests
         };
 
         _unitOfWorkMock
-            .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((ProdutoInvestimento?)null);
+            .Setup(x => x.ProdutoRepository.ObterPorTipoEPerfilAsync(It.IsAny<string>(), It.IsAny<PerfilInvestidor?>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<ProdutoInvestimento>());
 
         var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
 
@@ -164,12 +164,16 @@ public class SimulacaoServiceTests
         var cliente = new Cliente("Test Cliente", "test@example.com", "12345678901", DateTime.UtcNow.AddYears(-30));
 
         _unitOfWorkMock
-            .Setup(x => x.ProdutoRepository.ObterPorTipoAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(produto);
+            .Setup(x => x.ProdutoRepository.ObterPorTipoEPerfilAsync(It.IsAny<string>(), It.IsAny<PerfilInvestidor?>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<ProdutoInvestimento> { produto });
 
         _unitOfWorkMock
             .Setup(x => x.ClienteRepository.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(cliente);
+
+        _unitOfWorkMock
+            .Setup(x => x.ClienteRepository.ObterPerfilRiscoAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((PerfilRisco?)null); // Cliente sem perfil
 
         // Act & Assert
         await Assert.ThrowsAsync<ValidationException>(
