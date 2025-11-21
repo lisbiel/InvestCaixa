@@ -1,0 +1,436 @@
+{
+  "info": {
+    "_postman_id": "investcaixa-api-collection",
+    "name": "InvesteCaixa API",
+    "description": "Collection funcional para testar a API de Simulação de Investimentos CAIXA",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Autenticação",
+      "item": [
+        {
+          "name": "1. Login - Obter JWT Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "console.log('Response status:', pm.response.code);",
+                  "console.log('Response body:', pm.response.text());",
+                  "",
+                  "if (pm.response.code === 200) {",
+                  "  try {",
+                  "    var jsonData = pm.response.json();",
+                  "    console.log('Token recebido:', jsonData.token ? jsonData.token.substring(0, 30) + '...' : 'indefinido');",
+                  "    ",
+                  "    if (jsonData.token) {",
+                  "      pm.collectionVariables.set('jwt_token', jsonData.token);",
+                  "      pm.collectionVariables.set('refresh_token', jsonData.refreshToken);",
+                  "      console.log('✅ Token salvo em pm.collectionVariables');",
+                  "      console.log('Variável jwt_token agora vale:', pm.collectionVariables.get('jwt_token') ? pm.collectionVariables.get('jwt_token').substring(0, 30) + '...' : 'vazio');",
+                  "    } else {",
+                  "      console.error('❌ Campo token está vazio ou indefinido');",
+                  "    }",
+                  "  } catch(e) {",
+                  "    console.error('❌ Erro ao parsear JSON:', e.message);",
+                  "  }",
+                  "} else {",
+                  "  console.error('❌ Login falhou com status:', pm.response.code);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"usuario\": \"Caixa\",\"senha\": \"Caixa@Verso\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Refresh Token - Renovar JWT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"refreshToken\": \"{{refresh_token}}\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/refresh",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "refresh"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 Perfil Financeiro",
+      "item": [
+        {
+          "name": "1. Obter Opções de Preenchimento",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/perfil-financeiro/opcoes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "perfil-financeiro", "opcoes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Obter Exemplos de Perfis",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/perfil-financeiro/exemplos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "perfil-financeiro", "exemplos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Criar/Atualizar Perfil Financeiro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"rendaMensal\": 8000,\"patrimonioTotal\": 150000,\"dividasAtivas\": 10000,\"dependentesFinanceiros\": 1,\"horizonte\": 2,\"objetivo\": 3,\"toleranciaPerda\": 5,\"experienciaInvestimentos\": true}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/perfil-financeiro/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "perfil-financeiro", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Perfil de Risco",
+      "item": [
+        {
+          "name": "1. Obter Perfil de Risco do Cliente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perfil-risco/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "perfil-risco", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Obter Produtos Recomendados por Perfil",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perfil-risco/produtos-recomendados/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "perfil-risco", "produtos-recomendados", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💰 Simulações de Investimento",
+      "item": [
+        {
+          "name": "1. Listar Produtos Disponíveis",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/simulacao/produtos-disponiveis",
+              "host": ["{{base_url}}"],
+              "path": ["api", "simulacao", "produtos-disponiveis"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Simular Investimento (Com Proximidade de Perfil)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"clienteId\": 1,\"valor\": 10000,\"prazoMeses\": 12,\"tipoProduto\": \"CDB\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/simulacao/simular-investimento",
+              "host": ["{{base_url}}"],
+              "path": ["api", "simulacao", "simular-investimento"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Obter Todas as Simulações",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/simulacao/simulacoes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "simulacao", "simulacoes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Simulações por Produto e Dia",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/simulacao/simulacoes/por-produto-dia?dataInicio=2025-11-01&dataFim=2025-11-30",
+              "host": ["{{base_url}}"],
+              "path": ["api", "simulacao", "simulacoes", "por-produto-dia"],
+              "query": [
+                {
+                  "key": "dataInicio",
+                  "value": "2025-11-01"
+                },
+                {
+                  "key": "dataFim",
+                  "value": "2025-11-30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Produtos Recomendados por Tipo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/simulacao/produtos-recomendados/1/CDB",
+              "host": ["{{base_url}}"],
+              "path": ["api", "simulacao", "produtos-recomendados", "1", "CDB"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💎 Investimentos Finalizados",
+      "item": [
+        {
+          "name": "1. Finalizar Investimento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"clienteId\": 1,\"produtoId\": 1,\"valorAplicado\": 10000,\"prazoMeses\": 12}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/investimentos/finalizar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "investimentos", "finalizar"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Obter Histórico Completo do Cliente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/investimentos/historico/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "investimentos", "historico", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📈 Telemetria & Monitoramento",
+      "item": [
+        {
+          "name": "1. Dados de Telemetria",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/telemetria?dataInicio=2025-11-01&dataFim=2025-11-30",
+              "host": ["{{base_url}}"],
+              "path": ["api", "telemetria"],
+              "query": [
+                {
+                  "key": "dataInicio",
+                  "value": "2025-11-01"
+                },
+                {
+                  "key": "dataFim",
+                  "value": "2025-11-30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Health Check - Geral",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Health Check - Readiness",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health/ready",
+              "host": ["{{base_url}}"],
+              "path": ["health", "ready"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Health Check - Liveness",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health/live",
+              "host": ["{{base_url}}"],
+              "path": ["health", "live"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:7148"
+    },
+    {
+      "key": "jwt_token",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
+      "value": ""
+    }
+  ]
+}
