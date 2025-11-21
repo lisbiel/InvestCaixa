@@ -1,3 +1,4 @@
+
 using HealthChecks.UI.Client;
 using InvestCaixa.API.Extensions;
 using InvestCaixa.Domain.Entities;
@@ -148,7 +149,9 @@ static async Task SeedDatabase(InvestimentoDbContext dbContext, Microsoft.Extens
             new("Ana Beatriz Alves", "ana.alves@email.com", "55566677788", new
             DateTime(1995, 5, 3)),
             new("Roberto Carlos Mendes", "roberto.mendes@email.com", "99988877766", new
-            DateTime(1982, 11, 17))
+            DateTime(1982, 11, 17)),
+            new("Fernanda Souza Ribeiro", "fernanda.souza@email.com", "44455566677", new
+            DateTime(1988, 9, 30))
         };
 
         await dbContext.Clientes.AddRangeAsync(clientes);
@@ -159,8 +162,9 @@ static async Task SeedDatabase(InvestimentoDbContext dbContext, Microsoft.Extens
         // PERFIS FINANCEIROS REALÍSTICOS
         var perfisFinanceiros = new List<PerfilFinanceiro>
         {
-            // Cliente Conservador
-            new(clientes[0].Id, 5000m, 80000m, 15000m, 2,
+            // Cliente Conservador - Garantido baixa pontuação (<= 38)
+            // Volume: 5000, Frequência: 1, Liquidez: false(10pts), Horizonte: Curto(5pts), Tolerância: 1(2pts)
+            new(clientes[0].Id, 2000m, 50000m, 8000m, 1,
             HorizonteInvestimento.CurtoPrazo, ObjetivoInvestimento.ReservaEmergencia,
             1, false),
 
@@ -182,7 +186,12 @@ static async Task SeedDatabase(InvestimentoDbContext dbContext, Microsoft.Extens
             // Cliente Conservador Experiente
             new(clientes[4].Id, 12000m, 350000m, 80000m, 3,
             HorizonteInvestimento.MedioPrazo, ObjetivoInvestimento.Aposentadoria,
-            3, true)
+            3, true),
+
+            //Cliente conservador baixo histórico
+            new(clientes[5].Id, 1500m, 20000m, 3000m, 0 
+            ,HorizonteInvestimento.CurtoPrazo, ObjetivoInvestimento.ReservaEmergencia,
+            2, false)
         };
 
         await dbContext.PerfisFinanceiros.AddRangeAsync(perfisFinanceiros);
@@ -208,6 +217,9 @@ static async Task SeedDatabase(InvestimentoDbContext dbContext, Microsoft.Extens
 
                 // Roberto - Conservador Experiente
                 new(clientes[4].Id, produtos[1].Nome, produtos[1].Id, 100000m, 122000m, 18, DateTime.UtcNow.AddDays(-25))
+
+                // Fernanda - Conservador baixo histórico
+                ,new(clientes[5].Id, produtos[3].Nome, produtos[3].Id, 3000m, 3243.20m, 6, DateTime.UtcNow.AddDays(-3))
             };
 
         await dbContext.Simulacoes.AddRangeAsync(simulacoes);

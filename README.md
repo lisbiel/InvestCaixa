@@ -455,6 +455,23 @@ CLIENTE                         SERVIDOR API
   │                              └─ Atualizar banco de dados
 ```
 
+### 🚀 Credenciais de Demonstração (MVP/Demo)
+
+> ⚠️ **IMPORTANTE:** As credenciais abaixo são **APENAS PARA DEMONSTRAÇÃO E MVP**. 
+> Esta é uma implementação funcional de JWT Authentication para fins educacionais/prototipagem. 
+> **Em produção**, integre com sistema de banco de dados real e implemente:
+> - ✅ Validação contra tabela de usuários
+> - ✅ Hashing seguro de senhas (bcrypt, Argon2)
+> - ✅ Gerenciamento de roles e permissões
+> - ✅ Audit trail de login/logout
+
+**Para acessar a API em desenvolvimento/MVP:**
+
+| Campo | Valor |
+|-------|-------|
+| **Usuário** | `Caixa` |
+| **Senha** | `Caixa@Verso` |
+
 ### Endpoint de Login
 
 **Requisição:**
@@ -462,8 +479,8 @@ CLIENTE                         SERVIDOR API
 curl -X POST http://localhost:7148/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "usuario": "admin",
-    "senha": "Admin@123"
+    "usuario": "Caixa",
+    "senha": "Caixa@Verso"
   }'
 ```
 
@@ -617,14 +634,15 @@ public class MyService
 
 ## 🎯 Demonstração da API (Exemplos Práticos)
 
-### 🔐 1. Autenticação (Obter Token)
+### 🔐 1. Autenticação (Obter Token) - ✅ Demo Funcional
 
 ```bash
+# Credenciais de demo para MVP (veja seção 🚀 Credenciais de Demonstração acima)
 curl -X POST http://localhost:7148/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "usuario": "admin",
-    "senha": "Admin@123"
+    "usuario": "Caixa",
+    "senha": "Caixa@Verso"
   }'
 
 # Resposta:
@@ -632,7 +650,7 @@ curl -X POST http://localhost:7148/api/auth/login \
   "token": "eyJhbGciOiJIUzI1NiIs...",
   "refreshToken": "c3RyaW5nLmNvbS4u...",
   "expiresIn": 3600,
-  "usuario": "admin"
+  "usuario": "Caixa"
 }
 ```
 

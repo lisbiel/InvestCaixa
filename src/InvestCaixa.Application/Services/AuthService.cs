@@ -24,7 +24,7 @@ public class AuthService : IAuthService
 
         // TODO: Validar credenciais contra banco de dados
         // Este é um exemplo simplificado para demo
-        if (request.Usuario != "admin" || request.Senha != "Admin@123")
+        if (request.Usuario != "Caixa" || request.Senha != "Caixa@Verso")
         {
             _logger.LogWarning("Falha de autenticação para usuário {Username}", request.Usuario);
             return null;
